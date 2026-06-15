@@ -1,46 +1,390 @@
 *{
-    margin: 0;
-    padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#07141b;
+    color:rgb(0, 0, 0);
+    font-family:'Montserrat',sans-serif;
+}
+
+/* =========================
+   TEXTOS
+========================= */
+
+h1{ font-size:3.2rem; margin-bottom:20px;}
+h2{ font-size:2.4rem; margin-bottom:40px;}
+h3{ font-size:1.8rem; margin:20px 0;}
+h4{ font-size:1.4rem; margin:20px 0;}
+p{ font-size:1.1rem; line-height:1.5; font-weight:300; }
+
+.foto-perfil{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:50%;
+    margin-bottom:15px;
+}
+
+/* =========================
+   LAYOUT TV
+========================= */
+
+.tv-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+.tv-wrapper{
+    position:relative;
+    width:min(1200px,95vw);
+    isolation:isolate;
+}
+
+.tv-frame{
+    width:100%;
+    display:block;
+    position:relative;
+    z-index:5;
+}
+
+/* =========================
+   PANTALLA
+========================= */
+
+.tv-screen{
+    position:absolute;
+    top: 14%;    /* 👈 Bajamos un poco el inicio superior para ganar espacio (Antes: 20%) */
+    left: 8.5%;  /* 👈 Lo movemos más a la izquierda para centrar el hueco (Antes: 11%) */
+    width: 71%;  /* 👈 Expandimos el ancho para que llegue hasta el borde de madera derecho (Antes: 66%) */
+    height: 69%; /* 👈 Ampliamos el alto para que llene el hueco por abajo (Antes: 58%) */
+
+    border-radius:30px;
+    background:#09151b;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+    z-index:1;
+    transition:box-shadow .6s ease;
+}
+
+/* ENCENDIDO */
+.tv-on .tv-screen{
+    box-shadow:
+        0 0 25px rgba(255,255,255,.15),
+        inset 0 0 20px rgba(255,255,255,.1);
+}
+
+/* =========================
+   FONDOS OFF / ON
+========================= */
+
+.tv-bg,
+.tv-bg-on{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border-radius:30px;
+    z-index:0;
+    overflow:hidden;
+}
+
+/* OFF IMAGE */
+.tv-bg {
+    /* display: flex; 👈 Elimina o comenta esta línea */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.tv-bg img{
+    width:100%;
+    height:100%;
+    min-width: 100%;  /* 👈 Fuerza a que cubra todo el ancho flex */
+    min-height: 100%; /* 👈 Fuerza a que cubra todo el alto flex */
+    object-fit:cover; /* clave real */
+    object-position: center top;
+    transform:none; /* ❌ eliminar scale */
+}
+
+/* ON GRADIENT */
+.tv-bg-on{
+    background: radial-gradient(
+        circle at center,
+        #f7f7f2 0%,
+        #e6e6dc 50%,
+        #cfcfc4 120%
+    );
+
+    opacity:0;
+    transition:opacity .6s ease;
+}
+
+/* estados ON/OFF */
+.tv-on .tv-bg-on{
+    opacity:1;
+}
+
+.tv-on .tv-bg{
+    opacity:0;
+}
+
+/* =========================
+   CRT OVERLAY
+========================= */
+
+.tv-screen::before,
+.tv-screen::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:10;
+}
+
+.tv-screen::before{
+    background:repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,.03) 0px,
+        rgba(255,255,255,.03) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+.tv-screen::after{
+    background:radial-gradient(
+        circle,
+        transparent 40%,
+        rgba(0,0,0,.35) 100%
+    );
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.tv-content{
+    display:none;
+    width:100%;
+    height:100%;
+    padding:55px 45px 50px 55px;
+
+    text-align:center;
+
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+    z-index:2;
+
+    animation:tvOn .3s ease;
+}
+
+.tv-content.active{
+    display:flex;
+}
+
+@keyframes tvOn{
+    0%{opacity:0; transform:scaleY(0);}
+    100%{opacity:1; transform:scaleY(1);}
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.project-slide{
+    display:none;
+    width:100%;
+    height:100%;
+    flex-direction:column;
+    justify-content: space-between; /* 👈 Distribuye el espacio limpiamente entre imagen e info */
+    gap: 15px;                      /* 👈 Separa un poco la imagen del texto */
+}
+
+.project-slide.active{
+    display:flex;
+}
+
+.project-slide img{
+    width: 100%;
+    height: 70px;          /* 👈 Bajamos del 80% al 70% para dar más margen */
+    flex-grow: 1;          /* 👈 Hace que la imagen use el espacio disponible sin romper el diseño */
+    object-fit: contain;   /* 👈 CAMBIO CLAVE: 'contain' asegura que la captura se vea ENTERA sin recortarse */
+    border-radius:10px;
+    background: #000;      /* 👈 Opcional: añade un fondo negro por si la captura no es perfectamente panorámica */
+}
+
+.project-info{
+    /* Eliminamos el height fijo del 20% para que se adapte al texto perfectamente */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding: 5px 10px;
+}
+
+.project-info h3 {
+    margin: 5px 0; /* 👈 Reduce el margen por defecto que tenían los h3 de 20px */
+    font-size: 1.5rem; /* 👈 Un pelín más pequeño para que respire dentro de la pantalla */
+}
+
+.project-info p {
+    font-size: 1rem;
+}
+
+/* =========================
+   BOTONES (METÁLICOS)
+========================= */
+
+.tv-dial{
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:20;
+}
+
+/* ON */
+.dial-on{
+    right:6.5%;
+    top:10%;
+    width:85px;
+    height:85px;
+
+    background:linear-gradient(125deg, grey, white, grey);
+    border:4px solid rgb(61,61,61);
+}
+
+/* CANALES */
+.tv-controls{
+    position:absolute;
+    right:7.3%;
+    top:30%;
+
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.tv-controls .tv-dial{
+    position:static;
+    width:70px;
+    height:70px;
+
+    background:linear-gradient(125deg, darkslategray, white, darkslategray);
+    border:4px solid rgb(61,61,61);
+}
+
+/* =========================
+   MOSCA DE CANAL (WATERMARK)
+========================= */
+
+.tv-mosca {
+    position: absolute;
+    bottom: 45px;   /* 👈 Separación del borde inferior de la pantalla */
+    right: 45px;    /* 👈 Separación del borde derecho, metida hacia dentro */
     
-}
-
-body {
-    background-color: #0F2027;
-    color: #E7D7C1;
     font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
+    font-weight: 700;
+    font-size: 1.6rem;
+    
+    /* Efecto translúcido típico de las moscas de TV */
+    color: rgba(212, 37, 24, 0.8); /* Blanco con opacidad para que se vea sobre cualquier fondo */
+    
+    /* Un ligero relieve blanco para que se lea tanto en fondos oscuros como claros */
+    text-shadow: 1px 2px 3px rgba(19, 17, 17, 0.521); 
+    
+    pointer-events: none; /* Evita que el usuario la cliquee sin querer */
+    z-index: 15;          /* Por encima del contenido, pero bajo el cristal CRT */
+    user-select: none;    /* Para que no se seleccione al arrastrar el ratón */
+}
 
+/* Opcional: Si quieres un look digital noventero, puedes meterle un borde sutil estilo caja */
+/* 
+.tv-mosca {
+    background: rgba(87, 87, 87, 0.075);
+    padding: 2px 10px;
+    border-radius: 4px;
+    border: 3px solid rgba(3, 3, 29, 0.089);
+}  */
+
+
+/* =========================
+   NOISE CRT
+========================= */
+
+.tv-noise{
+    position:absolute;
+    inset:0;
+    z-index:3;
+    pointer-events:none;
+
+    background-image:url("https://www.transparenttextures.com/patterns/noise.png");
+    opacity:0;
+    mix-blend-mode:overlay;
+    animation:noiseMove .2s infinite;
+}
+
+@keyframes noiseMove{
+    0%{transform:translate(0,0);}
+    25%{transform:translate(-2%,2%);}
+    50%{transform:translate(2%,-2%);}
+    75%{transform:translate(-1%,1%);}
+    100%{transform:translate(0,0);}
 }
 
 
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 16px;
-}
 
-.foto-perfil {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #E7D7C1;
+/* =========================
+   RESPONSIVE
+========================= */
 
-    &:hover {
-        transform: scale(1.05);
-        transition: transform 0.3s ease;
+@media (max-width:768px){
+
+    .tv-controls{
+        right:2%;
+        top:45%;
+        gap:12px;
+    }
+
+    .tv-dial{
+        width:55px;
+        height:55px;
+    }
+
+    .dial-on{
+        width:65px;
+        height:65px;
+    }
+
+    .tv-screen{
+        border-radius:15px;
     }
 }
 
-h1 {
-    font-size: 2.5rem;
-}
+/* =========================
+   FOOTER
+========================= */
 
-p {
-    font-size: 1.2rem;
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:.6;
 }
