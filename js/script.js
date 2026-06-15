@@ -10,6 +10,15 @@ let slideInterval = null;
 let tvOn = false;
 
 /* =========================
+   AUDIO CONFIGURATION
+========================= */
+const soundClick = new Audio('audio/click.wav');
+const soundStatic = new Audio('audio/tv-static.wav');
+
+soundClick.volume = 0.4;
+soundStatic.volume = 0.3;
+
+/* =========================
    SLIDESHOW PROJECTS
 ========================= */
 
@@ -45,7 +54,6 @@ function stopSlideshow(){
 ========================= */
 
 function showContent(target){
-
     contents.forEach(c => c.classList.remove("active"));
 
     const el = document.querySelector(`[data-content="${target}"]`);
@@ -56,12 +64,16 @@ function showContent(target){
 }
 
 /* =========================
-   EVENTOS BOTONES
+   EVENTOS BOTONES (CON AUDIO UNIFICADO)
 ========================= */
 
 dials.forEach(dial => {
 
     dial.addEventListener("click", () => {
+        
+        // 🔊 REPRODUCCIÓN DE SONIDO BASE: Cualquier botón que toques hace "click"
+        soundClick.currentTime = 0;
+        soundClick.play();
 
         const target = dial.dataset.content;
 
@@ -72,8 +84,11 @@ dials.forEach(dial => {
 
             tvOn = !tvOn;
 
-            if(tvOn){
+            // 🔊 Si se está encendiendo o apagando, metemos ruido de estática
+            soundStatic.currentTime = 0;
+            soundStatic.play();
 
+            if(tvOn){
                 // ENCENDER TV
                 tvScreen.classList.add("tv-on");
 
@@ -87,10 +102,8 @@ dials.forEach(dial => {
                 document.querySelector('.dial-1')?.classList.add("active");
 
             }else{
-
                 // APAGAR TV
                 tvScreen.classList.remove("tv-on");
-
                 contents.forEach(c => c.classList.remove("active"));
 
                 if(tvBg){
@@ -111,6 +124,10 @@ dials.forEach(dial => {
         /* =====================
            CAMBIO DE CANAL
         ===================== */
+        
+        // 🔊 Si cambia de canal estando encendida, metemos un chispazo corto de estática
+        soundStatic.currentTime = 0;
+        soundStatic.play();
 
         dials.forEach(d => d.classList.remove("active"));
         dial.classList.add("active");
@@ -122,15 +139,12 @@ dials.forEach(dial => {
         ===================== */
 
         if(target === "projects"){
-
             currentSlide = 0;
             showSlide(currentSlide);
             startSlideshow();
-
         }else{
             stopSlideshow();
         }
 
     });
-
 });
