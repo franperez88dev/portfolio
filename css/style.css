@@ -1,17 +1,18 @@
 *{
     margin: 0;
     padding: 0;
-<<<<<<< HEAD
     font-family: 'Montserrat', sans-serif;
-=======
-    font-family: monserrant,sans-serif;
->>>>>>> 44f57ae820308c15cd7875dfb94108debb75abcf
-    background: #0F2027;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #E7D7C1;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-<<<<<<< HEAD
+    
 }
+
+body {
+    background-color: #0F2027;
+    color: #E7D7C1;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+
+}
+
 
 .hero {
     min-height: 100vh;
@@ -29,6 +30,11 @@
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #E7D7C1;
+
+    &:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+    }
 }
 
 h1 {
@@ -37,6 +43,4 @@ h1 {
 
 p {
     font-size: 1.2rem;
-=======
->>>>>>> 44f57ae820308c15cd7875dfb94108debb75abcf
 }
