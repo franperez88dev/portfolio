@@ -34,24 +34,30 @@ p{ font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.5; font-weight: 300; 
 ========================= */
 
 .tv-container{
-    min-height:100vh;
+    min-height: 100vh;
+    overflow:hidden;
+    position:relative;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:30px;
+    padding:70px;    
+    box-sizing:border-box;
 }
 
 .tv-wrapper{
     position:relative;
-    width:min(1200px,95vw);
-    isolation:isolate;
+    isolation:isolate;    
+    /* clave: limita por ancho Y por alto disponibles */
+    width: min(1080px, 100%, calc((100vh - 140px) * 1.216));
+    /* el 1080/720 debe ser la proporción ancho/alto real de tu imagen marcoTV.webp */
 }
 
 .tv-frame{
-    width:100%;
-    display:block;
-    position:relative;
-    z-index:5;
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 5;
 }
 
 /* =========================
