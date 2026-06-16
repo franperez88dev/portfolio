@@ -9,53 +9,40 @@
 
 body {
     background: #07141b;
-    color: #000000;
+    color: #333;
     font-family: 'Montserrat', sans-serif;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     overflow: hidden;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* user-select: none; */
     font-weight: 600;
-    color: #333;
-
 }
 
 /* =========================================================
    TEXTOS GENERALES (base, cada canal puede sobreescribir)
 ========================================================= */
-h1 { 
-    font-size: 3rem; 
-    color:blue;
+h1 {
+    font-size: clamp(1.25rem, 4vw, 2.5rem);
+    color: blue;
     margin-bottom: 10px;
 }
 
-h2 { 
-    font-size: 2rem; 
+h2 {
+    font-size: clamp(1rem, 3vw, 2rem);
     margin-top: 20px;
-    
 }
 
-h3 { 
-    font-size: 1.75rem; 
+h3 {
+    font-size: clamp(0.75rem, 2.5vw, 1.5rem);
     margin-top: 10px;
-    
 }
 
-/* h4 { font-size: 1.4rem; margin: 20px 0; } */ 
-
-p, span {   
-    font-size: 1.5rem;
-    margin-top: 10px;    
+p, span {
+    font-size: clamp(0.5rem, 2.5vw, 1.25rem);
+    margin-top: 10px;
     line-height: 1.5;
 }
-
-/* span{
-    font-size: 1.5rem;
-} */
-
-
 
 /* =========================================================
    LAYOUT TV
@@ -79,16 +66,68 @@ p, span {
     width: min(1080px, 100%, calc((100vh - 140px) * 1.216));
 }
 
+/* =========================================================
+   CAPA 1: FONDO (siempre detrás de todo)
+========================================================= */
+.tv-bg {
+    position: absolute;
+    top: 14%;
+    left: 9.5%;
+    width: 71%;
+    height: 70%;
+    border-radius: 30px;
+    overflow: hidden;
+    z-index: 0;
+    background: radial-gradient(
+        circle at center,
+        #f7f7f2 0%,
+        #e6e6dc 50%,
+        #cfcfc4 120%
+    );
+}
+
+.tv-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: opacity .6s ease;
+}
+
+.tv-bg p {
+    position: absolute;
+    bottom: 46%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #727272;
+    font-size: clamp(0.7rem, 3vw, 2rem);
+    margin: 0;
+    z-index: 1;
+}
+
+/* Cuando la TV se enciende, esta clase oculta la imagen
+   de "apagado" y deja ver el degradado de fondo */
+.tv-bg.apagado-oculto img,
+.tv-bg.apagado-oculto p {
+    opacity: 0;
+}
+
+
+
+/* =========================================================
+   CAPA 2: MARCO (en medio, decorativo)
+========================================================= */
 .tv-marco {
     width: 100%;
     height: auto;
     display: block;
     position: relative;
-    z-index: 5;
+    z-index: 1;
 }
 
 /* =========================================================
-   PANTALLA
+   CAPA 3: PANTALLA / CONTENIDO (siempre delante, interactivo)
 ========================================================= */
 .tv-screen {
     position: absolute;
@@ -97,60 +136,23 @@ p, span {
     width: 71%;
     height: 70%;
     border-radius: 30px;
-    background: #09151b;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    z-index: 1;
+    z-index: 2;
     transition: box-shadow .6s ease;
 }
 
-.tv-on .tv-screen {
+.tv-screen.tv-on {
     box-shadow:
         0 0 25px rgba(255,255,255,.15),
         inset 0 0 20px rgba(255,255,255,.1);
 }
 
 /* =========================================================
-   FONDOS OFF / ON
-========================================================= */
-.tv-bg,
-.tv-bg-on {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.tv-bg img {
-    width: 100%;
-    height: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    object-fit: cover;
-    object-position: center top;
-}
-
-.tv-bg-on {
-    background: radial-gradient(
-        circle at center,
-        #f7f7f2 0%,
-        #e6e6dc 50%,
-        #cfcfc4 120%
-    );
-    opacity: 0;
-    transition: opacity .6s ease;
-}
-
-.tv-on .tv-bg-on { opacity: 1; }
-.tv-on .tv-bg    { opacity: 0; }
-
-/* =========================================================
-   CRT OVERLAY
+   CRT OVERLAY (efecto líneas + viñeta sobre la pantalla)
 ========================================================= */
 .tv-screen::before,
 .tv-screen::after {
@@ -158,7 +160,7 @@ p, span {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    z-index: 10;
+    z-index: 3;
 }
 
 .tv-screen::before {
@@ -181,8 +183,6 @@ p, span {
 
 /* =========================================================
    BASE COMÚN A TODOS LOS CANALES
-   (solo lo que TODOS comparten: nada de padding/gap aquí,
-   eso se define por canal más abajo)
 ========================================================= */
 .tv-content {
     display: none;
@@ -192,7 +192,6 @@ p, span {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 2;
     overflow: hidden;
     text-align: center;
     animation: tvOn .3s ease;
@@ -225,25 +224,13 @@ p, span {
     flex-shrink: 1;
 }
 
-/* .channel-home h1 {
-    margin-bottom: 8px;
-}
-
-.channel-home p {
-    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
-} */
-
 /* =========================================================
    CANAL: SOBRE MÍ
 ========================================================= */
-/* .channel-about {
+.channel-about {
     padding: 8% 10%;
     gap: 16px;
 }
-
-.channel-about p {
-    font-size: clamp(0.8rem, 1.6vw, 1rem);
-} */
 
 /* =========================================================
    CANAL: HABILIDADES
@@ -253,7 +240,7 @@ p, span {
     gap: 8px;
 }
 
-.channel-skills h3 {
+.channel-skills h2 {
     margin: 8px 0 4px;
     font-size: clamp(0.9rem, 2vw, 1.2rem);
 }
@@ -297,7 +284,7 @@ p, span {
     flex-direction: column;
     justify-content: center;
     padding: 5px;
-    margin:0px;
+    margin: 0;
     flex-shrink: 0;
 }
 
@@ -306,8 +293,8 @@ p, span {
 }
 
 .project-info p {
-    font-size:small;
-    margin: 0px;
+    font-size: small;
+    margin: 0;
 }
 
 /* =========================================================
@@ -324,9 +311,13 @@ p, span {
     gap: clamp(20px, 5vw, 50px);
 }
 
+.contact-icons a {
+    display: inline-block;
+}
+
 .contact-icons img {
-    width: clamp(40px, 8vh, 70px);
-    height: clamp(40px, 8vh, 70px);
+    width: clamp(10px, 8vh, 80px);
+    height: clamp(10px, 8vh, 80px);
     transition: transform 0.2s ease;
 }
 
@@ -343,7 +334,7 @@ p, span {
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 20;
+    z-index: 5;
 }
 
 .tv-controls {
@@ -380,7 +371,7 @@ p, span {
     bottom: 9%;
     right: 9%;
     background: rgba(0, 0, 0, 0.5);
-    color: #00ff00;
+    color: #00ff00bd;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: clamp(1rem, 2.5vw, 1.6rem);
@@ -389,12 +380,12 @@ p, span {
     text-align: center;
     text-shadow: 1px 2px 3px rgba(19, 17, 17, 0.521);
     pointer-events: none;
-    z-index: 15;
+    z-index: 4;
     user-select: none;
 }
 
 /* =========================================================
-   NOISE CRT
+   NOISE CRT (preparado, aún no enganchado en el HTML)
 ========================================================= */
 .tv-noise {
     position: absolute;
@@ -416,116 +407,62 @@ p, span {
 }
 
 /* =========================================================
-   FOOTER
+   RESPONSIVE — TABLET / MEDIANO (max-width: 1024px)
 ========================================================= */
-footer {
-    text-align: center;
-    padding: 20px;
-    opacity: .6;
-    color: #fff;
-}
-
-/* =========================================================
-   RESPONSIVE — TABLET (max-width: 768px)
-   Separado por canal para poder probar cada uno
-   de forma independiente.
-========================================================= */
-
-/* @media (max-width: 768px) {
-    .channel-home {
-        padding: 5% 8%;
-    }
-    .channel-home .foto-perfil {
-        margin-top: -10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .channel-about {
-        padding: 5% 8%;
-    }
-}
-
-@media (max-width: 768px) {
-    .channel-skills {
-        padding: 5% 8%;
-    }
-}
-
-@media (max-width: 768px) {
-    .channel-projects {
-        padding: 5% 8%;
-    }
-}
-
-@media (max-width: 768px) {
-    .channel-contact {
-        padding: 5% 8%;
-    }
-} */
-
-/* =========================================================
-   RESPONSIVE — MÓVIL (max-width: 480px)
-   Separado por canal para poder probar cada uno
-   de forma independiente.
-========================================================= */
-@media only screen and (max-width: 1024px) {
-     .tv-container {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .tv-container {
         padding: 10px;
     }
 
+    .tv-bg,
     .tv-screen {
         border-radius: 15px;
     }
 
-    /* h1 { font-size: 2rem; }
-    h2 { font-size: 1.8rem; }
-    h3 { font-size: 1.4rem; }
-    p  { font-size: 1.2rem; line-height: 2; } */
     .channel-home {
         padding: 4% 6%;
-        
     }
-    .channel-home h1{
-        color: blue; 
-    }
+
     .channel-home .foto-perfil {
         width: clamp(50px, 20vh, 90px);
         height: clamp(50px, 20vh, 90px);
         margin-top: 0;
         margin-bottom: 2px;
     }
-    .channel-about {
-        padding: 4% 6%;
-    }
-    .channel-skills {
-        padding: 4% 6%;
-    }
-    .channel-projects {
-        padding: 4% 6%;
-    }
+
+    .channel-about,
+    .channel-skills,
+    .channel-projects,
     .channel-contact {
         padding: 4% 6%;
     }
-    .tv-mosca {
-        display: none;
-    }
 
 }
-@media only screen and (max-width: 768px) {
-    /* h1 { font-size: 1.8rem; }
-    h2 { font-size: 1.4rem; }
-    h3 { font-size: 1.2rem; }
-    p  { font-size: 1rem; line-height: 1.5; } */
-    .channel-home {
-        /* padding: 4% 6%; */
+
+/* =========================================================
+   RESPONSIVE — MÓVIL GRANDE (max-width: 768px)
+========================================================= */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+
+    .tv-container {
+        padding: 10px;
     }
 
-    .channel-home h1, p{
+    .tv-bg,
+    .tv-screen {
+        border-radius: 15px;
+        margin:0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-bottom: 2px;
+        padding-bottom:0%;
+    }
+
+    .channel-home h1,
+    .channel-home span {
         margin: -3px 0;
-        padding: -3px 0;
-        font-weight: 600;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
 
     .channel-home .foto-perfil {
@@ -535,48 +472,53 @@ footer {
         margin-bottom: 2px;
     }
 
-    .channel-about {
-        padding: 4% 6%;
+    .channel-about p {
+        margin: 2px 0 0 0;
+        padding:0;
+        line-height: 1.5;
+
     }
-    .channel-skills {
-        padding: 4% 6%;
-    }
-    .channel-projects {
-        padding: 4% 6%;
-    }
+
+    .channel-about,
+    .channel-skills,
+    .channel-projects,
     .channel-contact {
         padding: 4% 6%;
     }
-    .tv-mosca {
-        display: none;
+
+     .tv-mosca{
+        /* scale: .76; */
+        padding: 8px 8px;
+        bottom: 10%;
+        right: 7%;
+
     }
 
 }
 
+/* =========================================================
+   RESPONSIVE — MÓVIL PEQUEÑO (max-width: 480px)
+========================================================= */
 @media only screen and (max-width: 480px) {
-    h1,h2,h3,h4,span {
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        font-weight: 600;   
+    .tv-container {
+        padding: 10px;
+    }
+
+    .tv-bg,
+    .tv-screen {
+        border-radius: 15px;
+        margin:0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-bottom: 2px;
+        padding-bottom:0%;
+    }
+
+    .channel-home h1,
+    .channel-home span {
         margin: -3px 0;
-        padding: -3px 0;
-    }
-    /* h1,h2,h3{
-        color:blue;
-    } */
-
-    span{
-        font-size: .9rem;
-
-    }
-
-    .channel-home h1, p{
-        margin: -3px 0;
-        padding: -3px 0;
-            
-    }
-
-    .channel-home h1{
-        font-size: 1.5rem;
     }
 
     .channel-home .foto-perfil {
@@ -585,19 +527,49 @@ footer {
         margin-top: 0;
         margin-bottom: 2px;
     }
-    .channel-about h1{
-        font-size: 1.75rem;
+
+    .channel-about p {
+        margin: 2px 0 0 0;
+        padding:0;
+        line-height: 1.5;
     }
-    .channel-skills {
-        padding: 4% 6%;
+
+    .channel-skills h1{
+        margin: -5px 0;
+        padding: -5px 0;
     }
-    .channel-projects {
-        padding: 4% 6%;
+
+    .channel-skills h2{
+        margin: 5px 0;
+        padding: 2px 30px;
     }
-    .channel-contact {
-        padding: 4% 6%;
+
+    .channel-skills img{
+        margin: -10px 10px 0px 10px;
+        padding: 0 25px;
     }
-    .tv-mosca {
-        display:block;
+
+        .channel-projects h3{
+        margin: 2px 0;
+        padding: 0px;
     }
+
+    .channel-projects p{
+        margin: 0px;
+        padding: 0px;
+        font-size: xx-small;
+    }
+
+    .channel-contact img{
+        width: 4vh;
+        height: auto;
+    }
+
+    .tv-mosca{
+        scale: .5;
+        padding: 8px 8px;
+        bottom: 6%;
+        right: 4%;
+    }
+
 }

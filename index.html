@@ -1,147 +1,127 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Francisco Pérez</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Portfolio Francisco Pérez</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
+    <body>
+    <main>
+        <section class="tv-container">
+            <div class="tv-wrapper">
 
-<body>
-
-<main>
-
-    <section class="tv-container">
-
-        <div class="tv-wrapper">
-
-            <img src="img/marcoTV.webp" alt="TV Retro" class="tv-marco">
-
-            <div class="tv-screen">
-                <div class="tv-bg off active" id="tv-bg">
+                <!-- 1. FONDO: siempre detrás de todo -->
+                <div class="tv-bg" id="tv-bg">
                     <img src="img/bg_tv.webp" alt="TV Off">
+                    <p>© 2026 Francisco Pérez</p>
                 </div>
 
-                <div class="tv-bg-on" id="tv-bg-on"></div>
+                <!-- 2. MARCO: encima del fondo -->
+                <img src="img/marcoTV.webp" alt="TV Retro" class="tv-marco">
 
-                <!-- HOME -->
-                <div class="tv-content channel-home" data-content="home">
-                    <img src="img/foto.webp" alt="Fran" class="foto-perfil">
-                    <h1>Fran Pérez</h1>
-                    <span>Desarrollador Web · Full Stack</span>
-                </div>
+                <!-- 3. PANTALLA/CONTENIDO: encima de todo -->
+                <div class="tv-screen">
 
-                <!-- ABOUT -->
-                <div class="tv-content channel-about" data-content="about">
-                    <h1>Canal Sobre mí</h1>
-                    <p>Apasionado del desarrollo web y la programación.</p>
-                    <p>Me encanta crear apps, webs y pequeños <br>juegos en 2D/3D para divertirnos <br>
+                    <!-- HOME -->
+                    <div class="tv-content channel-home " data-content="home">
+                        <img src="img/foto.webp" alt="Fran" class="foto-perfil">
+                        <h1>Fran Pérez</h1>
+                        <span>Desarrollador Web · Full Stack</span>
+                    </div>
+
+                    <!-- ABOUT -->
+                    <div class="tv-content channel-about" data-content="about">
+                        <h1>Canal Sobre mí</h1>
+                        <p>Apasionado del desarrollo web y la programación.<br></p>
+                        <p>
+                        Me encanta crear apps, webs y pequeños juegos en 2D/3D para divertirnos
                         con la familia y los amigos.</p>
-                    <div class="tv-mosca">ch 1</div>
+                        <div class="tv-mosca">ch 1</div>
+                    </div>
+
+                    <!-- SKILLS -->
+                    <div class="tv-content channel-skills" data-content="skills">
+                        <h1>Canal Habilidades</h1>
+                        <h2>Principales</h2>
+                        <img src="https://skillicons.dev/icons?i=py,flask,html,css,js,unity,blender,cs" alt="skills">
+                        <h2>Aprendiendo</h2>
+                        <img src="https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,fastapi,django" alt="skills">
+                        <div class="tv-mosca">ch 2</div>
+                    </div>
+
+                    <!-- PROJECTS -->
+                    <div class="tv-content channel-projects" data-content="projects">
+                        <h1>Canal Proyectos</h1>
+
+                        <div class="project-slide active">
+                            <img src="img/ruleta/ruleta1.webp" alt="Ruleta">
+                            <div class="project-info">
+                                <h3>Ruleta de la Suerte (1/4)</h3>
+                                <p>(Node.js · Socket.IO · Phaser.js)</p>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <img src="img/inmobiliaria/inmo1.webp" alt="Inmobiliaria">
+                            <div class="project-info">
+                                <h3>Inmobiliaria IA (2/4)</h3>
+                                <p>(Flask · Mistral · YOLOv8)</p>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <img src="img/peliculas/peliculas1.webp" alt="Películas">
+                            <div class="project-info">
+                                <h3>Plat. de Películas (3/4)</h3>
+                                <p>(Flask · SQLAlchemy)</p>
+                            </div>
+                        </div>
+                        <div class="project-slide">
+                            <img src="img/mazmorra/mazmorra1.webp" alt="Mazmorra">
+                            <div class="project-info">
+                                <h3>Mazmorra 3D (4/4)</h3>
+                                <p>(Unity · C#)</p>
+                            </div>
+                        </div>
+                        <div class="tv-mosca">ch 3</div>
+                    </div>
+
+                    <!-- CONTACT -->
+                    <div class="tv-content channel-contact" data-content="contact">
+                        <h1>Canal Contacto</h1>
+                        <div class="contact-icons">
+                            <a href="https://www.linkedin.com/in/franciscoperezromero/" target="_blank" rel="noopener noreferrer">
+                                <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn">
+                            </a>
+                            <a href="https://github.com/franperez88dev" target="_blank" rel="noopener noreferrer">
+                                <img src="https://skillicons.dev/icons?i=github" alt="GitHub">
+                            </a>
+                            <a href="mailto:franciscoangelperez@gmail.com">
+                                <img src="https://skillicons.dev/icons?i=gmail" alt="Email">
+                            </a>
+                        </div>
+                        <div class="tv-mosca">ch 4</div>
+                    </div>
+
                 </div>
 
-                <!-- SKILLS -->
-                <div class="tv-content channel-skills" data-content="skills">
+                <!-- ON -->
+                <button class="tv-dial dial-on" data-content="home">ON</button>
 
-                    <h1>Canal Habilidades</h1>
-
-                    <h2>Principales</h2>
-                    <img src="https://skillicons.dev/icons?i=py,flask,html,css,js,unity,blender,cs" alt="skills">
-
-                    <h2>Aprendiendo</h2>
-                    <img src="https://skillicons.dev/icons?i=react,nextjs,ts,tailwind,fastapi,django" alt="skills">
-                    <div class="tv-mosca">ch 2</div>
-                </div>
-
-                <!-- PROJECTS -->
-                <div class="tv-content channel-projects" data-content="projects">
-                    <h1>Canal Proyectos</h1>
-                    
-
-                    <div class="project-slide active">
-                        <img src="img/ruleta/ruleta1.webp" alt="Ruleta">
-                        <div class="project-info">
-                            <h3>Ruleta de la Suerte</h3>
-                            <p>(Node.js · Socket.IO · Phaser.js)</p>
-                        </div>
-                    </div>
-
-                    <div class="project-slide">
-                        <img src="img/inmobiliaria/inmo1.webp" alt="Inmobiliaria">
-                        <div class="project-info">
-                            <h3>Inmobiliaria IA</h3>
-                            <p>(Flask · Mistral · YOLOv8)</p>
-                        </div>
-                    </div>
-
-                    <div class="project-slide">
-                        <img src="img/peliculas/peliculas1.webp" alt="Películas">
-                        <div class="project-info">
-                            <h3>Plataforma de Películas</h3>
-                            <p>(Flask · SQLAlchemy)</p>
-                        </div>
-                    </div>
-
-                    <div class="project-slide">
-                        <img src="img/mazmorra/mazmorra1.webp" alt="Mazmorra">
-                        <div class="project-info">
-                            <h3>Mazmorra 3D</h3>
-                            <p>(Unity · C#)</p>
-                        </div>
-                    </div>
-                    <div class="tv-mosca">ch 3</div>
-
-                </div>
-
-                <!-- CONTACT -->
-                <div class="tv-content channel-contact" data-content="contact">
-                    <h1>Canal Contacto</h1>
-                    <div class="contact-icons">
-                        <a href="https://www.linkedin.com/in/franciscoangelperez/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn">
-                        </a>
-                        <a href="https://github.com/franperez88dev" target="_blank" rel="noopener noreferrer">
-                            <img src="https://skillicons.dev/icons?i=github" alt="GitHub">
-                        </a>
-                        <a href="mailto:franciscoangelperez@gmail.com">
-                            <img src="https://skillicons.dev/icons?i=gmail" alt="Email">
-                        </a>
-                    </div>
-                    <div class="tv-mosca">ch 4</div>
+                <!-- CANALES -->
+                <div class="tv-controls">
+                    <button class="tv-dial dial-1" data-content="about">1</button>
+                    <button class="tv-dial dial-2" data-content="skills">2</button>
+                    <button class="tv-dial dial-3" data-content="projects">3</button>
+                    <button class="tv-dial dial-4" data-content="contact">4</button>
                 </div>
 
             </div>
-
-            <!-- ON -->
-            <button class="tv-dial dial-on" data-content="home">ON</button>
-
-            <!-- CANALES -->
-            <div class="tv-controls">
-                <!-- <button class="tv-dial dial-1" data-content="home">1</button> -->
-                <button class="tv-dial dial-1" data-content="about">1</button>
-                <button class="tv-dial dial-2" data-content="skills">2</button>
-                <button class="tv-dial dial-3" data-content="projects">3</button>
-                <button class="tv-dial dial-4" data-content="contact">4</button>
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-<footer>
-    <p>© 2026 Francisco Pérez</p>
-</footer>
-
-<script src="js/script.js"></script>
-
-</body>
+        </section>
+        </main>
+        <script src="js/script.js"></script>
+    </body>
 </html>
