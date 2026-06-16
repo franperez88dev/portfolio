@@ -1,58 +1,85 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* =========================================================
+   RESET
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-    background:#07141b;
-    color:rgb(0, 0, 0);
-    font-family:'Montserrat',sans-serif;
+body {
+    background: #07141b;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* user-select: none; */
+    font-weight: 600;
+    color: #333;
+
 }
 
-/* =========================
-   TEXTOS
-========================= */
-
-h1{ font-size: clamp(1.8rem, 4vw, 3.2rem); margin-bottom: 20px;}
-h2{ font-size: clamp(1.4rem, 3vw, 2.4rem); margin-bottom: 40px;}
-h3{ font-size: clamp(1.1rem, 2.5vw, 1.8rem); margin: 20px 0;}
-h4{ font-size: 1.4rem; margin:20px 0;}
-p{ font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.5; font-weight: 300; }
-
-.foto-perfil{
-    width: clamp(70px, 15vh, 130px);       /* 👈 Usamos 'vh' para que si la pantalla es bajita, la foto encoja */
-    height: clamp(70px, 15vh, 130px);      /* 👈 Mismo comportamiento para mantener el círculo */
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 5px;
-    flex-shrink: 1; /* 👈 Permite a la foto encogerse si los textos necesitan espacio */
+/* =========================================================
+   TEXTOS GENERALES (base, cada canal puede sobreescribir)
+========================================================= */
+h1 { 
+    font-size: 3rem; 
+    color:blue;
+    margin-bottom: 10px;
 }
 
-/* =========================
+h2 { 
+    font-size: 2rem; 
+    margin-top: 20px;
+    
+}
+
+h3 { 
+    font-size: 1.75rem; 
+    margin-top: 10px;
+    
+}
+
+/* h4 { font-size: 1.4rem; margin: 20px 0; } */ 
+
+p, span {   
+    font-size: 1.5rem;
+    margin-top: 10px;    
+    line-height: 1.5;
+}
+
+/* span{
+    font-size: 1.5rem;
+} */
+
+
+
+/* =========================================================
    LAYOUT TV
-========================= */
-
-.tv-container{
+========================================================= */
+.tv-container {
     min-height: 100vh;
-    overflow:hidden;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:70px;    
-    box-sizing:border-box;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 70px;
+    box-sizing: border-box;
 }
 
-.tv-wrapper{
-    position:relative;
-    isolation:isolate;    
-    /* clave: limita por ancho Y por alto disponibles */
+.tv-wrapper {
+    position: relative;
+    isolation: isolate;
+    /* limita el ancho por: tamaño máximo deseado, ancho de pantalla, y alto disponible
+       según la proporción real de marcoTV.webp (1721x1415 ≈ 1.216) */
     width: min(1080px, 100%, calc((100vh - 140px) * 1.216));
-    /* el 1080/720 debe ser la proporción ancho/alto real de tu imagen marcoTV.webp */
 }
 
-.tv-frame{
+.tv-marco {
     width: 100%;
     height: auto;
     display: block;
@@ -60,54 +87,36 @@ p{ font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.5; font-weight: 300; 
     z-index: 5;
 }
 
-/* =========================
+/* =========================================================
    PANTALLA
-========================= */
-
-.tv-screen{
-    position:absolute;
-    top: 14%;    
-    left: 8.5%;  
-    width: 71%;  
-    height: 69%; 
-
-    border-radius:30px;
-    background:#09151b;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    overflow:hidden;
-
-    z-index:1;
-    transition:box-shadow .6s ease;
+========================================================= */
+.tv-screen {
+    position: absolute;
+    top: 14%;
+    left: 9.5%;
+    width: 71%;
+    height: 70%;
+    border-radius: 30px;
+    background: #09151b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1;
+    transition: box-shadow .6s ease;
 }
 
-/* ENCENDIDO */
-.tv-on .tv-screen{
+.tv-on .tv-screen {
     box-shadow:
         0 0 25px rgba(255,255,255,.15),
         inset 0 0 20px rgba(255,255,255,.1);
 }
 
-/* =========================
+/* =========================================================
    FONDOS OFF / ON
-========================= */
-
+========================================================= */
 .tv-bg,
-.tv-bg-on{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    border-radius:30px;
-    z-index:0;
-    overflow:hidden;
-}
-
-/* OFF IMAGE */
-.tv-bg {
+.tv-bg-on {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -117,53 +126,43 @@ p{ font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.5; font-weight: 300; 
     overflow: hidden;
 }
 
-.tv-bg img{
-    width:100%;
-    height:100%;
-    min-width: 100%;  
-    min-height: 100%; 
-    object-fit:cover; 
+.tv-bg img {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
     object-position: center top;
-    transform:none; 
 }
 
-/* ON GRADIENT */
-.tv-bg-on{
+.tv-bg-on {
     background: radial-gradient(
         circle at center,
         #f7f7f2 0%,
         #e6e6dc 50%,
         #cfcfc4 120%
     );
-
-    opacity:0;
-    transition:opacity .6s ease;
+    opacity: 0;
+    transition: opacity .6s ease;
 }
 
-/* estados ON/OFF */
-.tv-on .tv-bg-on{
-    opacity:1;
-}
+.tv-on .tv-bg-on { opacity: 1; }
+.tv-on .tv-bg    { opacity: 0; }
 
-.tv-on .tv-bg{
-    opacity:0;
-}
-
-/* =========================
+/* =========================================================
    CRT OVERLAY
-========================= */
-
+========================================================= */
 .tv-screen::before,
-.tv-screen::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:10;
+.tv-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
 }
 
-.tv-screen::before{
-    background:repeating-linear-gradient(
+.tv-screen::before {
+    background: repeating-linear-gradient(
         to bottom,
         rgba(255,255,255,.03) 0px,
         rgba(255,255,255,.03) 2px,
@@ -172,287 +171,433 @@ p{ font-size: clamp(0.9rem, 1.8vw, 1.1rem); line-height: 1.5; font-weight: 300; 
     );
 }
 
-.tv-screen::after{
-    background:radial-gradient(
+.tv-screen::after {
+    background: radial-gradient(
         circle,
         transparent 40%,
         rgba(0,0,0,.35) 100%
     );
 }
 
-/* =========================
-   CONTENIDO
-========================= */
-
-.tv-content{
-    display:none;
-    width:100%;
-    height:100%;
-    max-height: 100%; /* 👈 Evita que el contenido estire la pantalla hacia abajo */
-    padding: 6% 8%;   
-
-    text-align:center;
-
-    flex-direction:column;
-    justify-content: center; /* 👈 Centra el contenido verticalmente si sobra espacio */
-    align-items:center;
-    gap: 1vh; /* 👈 Separa los elementos de forma proporcional a la altura de la pantalla */
-
-    position:relative;
-    z-index:2;
-    overflow: hidden; /* 👈 Corta cualquier desborde rebelde */
-
-    animation:tvOn .3s ease;
+/* =========================================================
+   BASE COMÚN A TODOS LOS CANALES
+   (solo lo que TODOS comparten: nada de padding/gap aquí,
+   eso se define por canal más abajo)
+========================================================= */
+.tv-content {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-align: center;
+    animation: tvOn .3s ease;
 }
 
-.tv-content.active{
-    display:flex;
+.tv-content.active {
+    display: flex;
 }
 
-@keyframes tvOn{
-    0%{opacity:0; transform:scaleY(0);}
-    100%{opacity:1; transform:scaleY(1);}
+@keyframes tvOn {
+    0%   { opacity: 0; transform: scaleY(0); }
+    100% { opacity: 1; transform: scaleY(1); }
 }
 
-/* Forzar a que las tiras de iconos no rompan el cristal de la TV */
-.tv-content[data-content="skills"] img {
+/* =========================================================
+   CANAL: HOME
+========================================================= */
+.channel-home {
+    padding: 6% 8%;
+    gap: 12px;
+}
+
+.channel-home .foto-perfil {
+    width: clamp(70px, 15vh, 130px);
+    height: clamp(70px, 15vh, 130px);
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: -20px;
+    margin-bottom: 5px;
+    flex-shrink: 1;
+}
+
+/* .channel-home h1 {
+    margin-bottom: 8px;
+}
+
+.channel-home p {
+    font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+} */
+
+/* =========================================================
+   CANAL: SOBRE MÍ
+========================================================= */
+/* .channel-about {
+    padding: 8% 10%;
+    gap: 16px;
+}
+
+.channel-about p {
+    font-size: clamp(0.8rem, 1.6vw, 1rem);
+} */
+
+/* =========================================================
+   CANAL: HABILIDADES
+========================================================= */
+.channel-skills {
+    padding: 5% 6%;
+    gap: 8px;
+}
+
+.channel-skills h3 {
+    margin: 8px 0 4px;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+}
+
+.channel-skills img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
-    margin-bottom: 10px;
 }
 
-/* Reducir los márgenes por defecto de los textos en el flujo flexible */
-.tv-content h1, 
-.tv-content h2, 
-.tv-content h3 {
-    margin-top: 5px;
-    margin-bottom: 5px; /* 👈 Sustituye los margin-bottom: 40px fijos que tenías arriba */
+/* =========================================================
+   CANAL: PROYECTOS
+========================================================= */
+.channel-projects {
+    padding: 4% 6%;
 }
 
-/* =========================
-   PROJECTS
-========================= */
+.project-slide {
+    display: none;
+    width: 90%;
+    height: 80%;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-.channel-header {
-    width: 100%;
+.project-slide.active {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 10px;
-    border-bottom: 2px dashed rgba(0, 0, 0, 0.15);
-    padding-bottom: 8px;
 }
 
-.channel-header h2 {
-    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-    margin-bottom: 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.channel-header .channel-number {
-    background: #000;
-    color: #00ff00;
-    font-family: monospace;
-    font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-}
-
-
-
-.project-slide{
-    display:none;
-    width:100%;
-    height:100%;
-    flex-direction:column;
-    justify-content: space-between; 
-    gap: 10px;                      
-}
-
-.project-slide.active{
-    display:flex;
-}
-
-/* Imágenes de los PROYECTOS (Canal 4) */
 .project-slide img {
-    width: 100%;
-    height: auto;
-    max-height: 45vh; /* 👈 Impide que la imagen del proyecto sature las pantallas de los móviles */
-    flex-grow: 1;          
-    object-fit: contain;   
-    border-radius:10px;
-    background: #000;      
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 1;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.project-info{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding: 5px 10px;
+.project-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5px;
+    margin:0px;
+    flex-shrink: 0;
 }
 
 .project-info h3 {
-    margin: 5px 0; 
-    font-size: clamp(1rem, 2.2vw, 1.4rem); 
+    margin-top: 3px;
 }
 
 .project-info p {
-    font-size: clamp(0.8rem, 1.8vw, 1rem);
+    font-size:small;
+    margin: 0px;
 }
 
-/* =========================
-   BOTONES (METÁLICOS) Y RESPONSIVE DINÁMICO
-========================= */
+/* =========================================================
+   CANAL: CONTACTO
+========================================================= */
+.channel-contact {
+    padding: 8% 10%;
+    gap: 20px;
+}
 
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 5vw, 50px);
+}
+
+.contact-icons img {
+    width: clamp(40px, 8vh, 70px);
+    height: clamp(40px, 8vh, 70px);
+    transition: transform 0.2s ease;
+}
+
+.contact-icons a:hover img {
+    transform: scale(1.15);
+}
+
+/* =========================================================
+   BOTONES (METÁLICOS)
+========================================================= */
 .tv-dial {
     position: absolute;
-    width: 6.5%;            
-    aspect-ratio: 1 / 1;    
+    width: 6.5%;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     cursor: pointer;
     z-index: 20;
 }
 
-/* ON */
-.dial-on {
-    right: 6.8%;
-    top: 10.5%;
-    width: 7.5%; 
-
-    background: linear-gradient(125deg, grey, white, grey);
-    border: 3px solid rgb(61,61,61);
-}
-
-/* CANALES */
 .tv-controls {
     position: absolute;
     right: 7.3%;
     top: 29%;
-    width: 6.5%; 
+    width: 6.5%;
     display: flex;
     flex-direction: column;
-    gap: 1.2vw; 
+    gap: 1.2vw;
 }
 
 .tv-controls .tv-dial {
     position: static;
     width: 100%;
     height: auto;
-
     background: linear-gradient(125deg, darkslategray, white, darkslategray);
     border: 3px solid rgb(61,61,61);
 }
 
-/* =========================
-   MOSCA DE CANAL (WATERMARK)
-========================= */
-.channel-number {
-    background: #000;
-    color: #00ff00;
-    font-family: monospace;
-    font-weight: bold;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+.dial-on {
+    right: 6.8%;
+    top: 10.5%;
+    width: 7.5%;
+    background: linear-gradient(125deg, grey, white, grey);
+    border: 3px solid rgb(61,61,61);
 }
 
+/* =========================================================
+   MOSCA DE CANAL
+========================================================= */
 .tv-mosca {
     position: absolute;
-    bottom: 8%;   /* 👈 Cambiado a porcentaje para que suba y baje con la pantalla */
-    right: 8%;    /* 👈 Cambiado a porcentaje para que no se salga en móviles */
-    
+    bottom: 9%;
+    right: 9%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #00ff00;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: clamp(1rem, 2.5vw, 1.6rem); /* 👈 Tamaño fluido */
-    
-    background: rgba(0, 0, 0, 0.5);
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
     padding: 10px 10px;
     border-radius: 50%;
-    
-    color: #00ff00;
     text-align: center;
-    
-    text-shadow: 1px 2px 3px rgba(19, 17, 17, 0.521); 
-    
-    pointer-events: none; 
-    z-index: 15;          
-    user-select: none;    
+    text-shadow: 1px 2px 3px rgba(19, 17, 17, 0.521);
+    pointer-events: none;
+    z-index: 15;
+    user-select: none;
 }
 
-/* =========================
+/* =========================================================
    NOISE CRT
-========================= */
-
-.tv-noise{
-    position:absolute;
-    inset:0;
-    z-index:3;
-    pointer-events:none;
-
-    background-image:url("https://www.transparenttextures.com/patterns/noise.png");
-    opacity:0;
-    mix-blend-mode:overlay;
-    animation:noiseMove .2s infinite;
+========================================================= */
+.tv-noise {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background-image: url("https://www.transparenttextures.com/patterns/noise.png");
+    opacity: 0;
+    mix-blend-mode: overlay;
+    animation: noiseMove .2s infinite;
 }
 
-@keyframes noiseMove{
-    0%{transform:translate(0,0);}
-    25%{transform:translate(-2%,2%);}
-    50%{transform:translate(2%,-2%);}
-    75%{transform:translate(-1%,1%);}
-    100%{transform:translate(0,0);}
+@keyframes noiseMove {
+    0%   { transform: translate(0,0); }
+    25%  { transform: translate(-2%,2%); }
+    50%  { transform: translate(2%,-2%); }
+    75%  { transform: translate(-1%,1%); }
+    100% { transform: translate(0,0); }
 }
 
-/* =========================
-   MEDIA QUERY UNIFICADA (MÓVIL)
-========================= */
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: .6;
+    color: #fff;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLET (max-width: 768px)
+   Separado por canal para poder probar cada uno
+   de forma independiente.
+========================================================= */
+
+/* @media (max-width: 768px) {
+    .channel-home {
+        padding: 5% 8%;
+    }
+    .channel-home .foto-perfil {
+        margin-top: -10px;
+    }
+}
 
 @media (max-width: 768px) {
-    .tv-container {
-        padding: 10px; 
+    .channel-about {
+        padding: 5% 8%;
+    }
+}
+
+@media (max-width: 768px) {
+    .channel-skills {
+        padding: 5% 8%;
+    }
+}
+
+@media (max-width: 768px) {
+    .channel-projects {
+        padding: 5% 8%;
+    }
+}
+
+@media (max-width: 768px) {
+    .channel-contact {
+        padding: 5% 8%;
+    }
+} */
+
+/* =========================================================
+   RESPONSIVE — MÓVIL (max-width: 480px)
+   Separado por canal para poder probar cada uno
+   de forma independiente.
+========================================================= */
+@media only screen and (max-width: 1024px) {
+     .tv-container {
+        padding: 10px;
     }
 
     .tv-screen {
         border-radius: 15px;
     }
-    
-    .tv-content {
-        padding: 5% 8%; 
-    }
-}
 
-/* 📱 REFUERZO EXTRA PARA MÓVILES EXTREMOS */
-@media (max-width: 480px) {
-    .tv-content {
+    /* h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.4rem; }
+    p  { font-size: 1.2rem; line-height: 2; } */
+    .channel-home {
+        padding: 4% 6%;
+        
+    }
+    .channel-home h1{
+        color: blue; 
+    }
+    .channel-home .foto-perfil {
+        width: clamp(50px, 20vh, 90px);
+        height: clamp(50px, 20vh, 90px);
+        margin-top: 0;
+        margin-bottom: 2px;
+    }
+    .channel-about {
         padding: 4% 6%;
     }
-    
-    /* Forzamos tamaños mínimos controlados en los textos para que no se amontonen */
-    h1 { font-size: 1.4rem; }
-    h2 { font-size: 1.2rem; }
-    h3 { font-size: 1rem; }
-    p  { font-size: 0.8rem; line-height: 1.3; }
-    
-    .channel-header h2 {
-        font-size: 1rem;
+    .channel-skills {
+        padding: 4% 6%;
     }
-    
+    .channel-projects {
+        padding: 4% 6%;
+    }
+    .channel-contact {
+        padding: 4% 6%;
+    }
     .tv-mosca {
-        display: none; /* 👈 En móviles muy pequeños quitamos la mosca para ganar espacio de lectura */
+        display: none;
     }
+
+}
+@media only screen and (max-width: 768px) {
+    /* h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.2rem; }
+    p  { font-size: 1rem; line-height: 1.5; } */
+    .channel-home {
+        /* padding: 4% 6%; */
+    }
+
+    .channel-home h1, p{
+        margin: -3px 0;
+        padding: -3px 0;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .channel-home .foto-perfil {
+        width: auto;
+        height: 50%;
+        margin-top: 0;
+        margin-bottom: 2px;
+    }
+
+    .channel-about {
+        padding: 4% 6%;
+    }
+    .channel-skills {
+        padding: 4% 6%;
+    }
+    .channel-projects {
+        padding: 4% 6%;
+    }
+    .channel-contact {
+        padding: 4% 6%;
+    }
+    .tv-mosca {
+        display: none;
+    }
+
 }
 
-/* =========================
-   FOOTER
-========================= */
+@media only screen and (max-width: 480px) {
+    h1,h2,h3,h4,span {
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        font-weight: 600;   
+        margin: -3px 0;
+        padding: -3px 0;
+    }
+    /* h1,h2,h3{
+        color:blue;
+    } */
 
-footer{
-    text-align:center;
-    padding:20px;
-    opacity:.6;
-    color: #fff; /* Asegura legibilidad sobre el fondo oscuro externo */
+    span{
+        font-size: .9rem;
+
+    }
+
+    .channel-home h1, p{
+        margin: -3px 0;
+        padding: -3px 0;
+            
+    }
+
+    .channel-home h1{
+        font-size: 1.5rem;
+    }
+
+    .channel-home .foto-perfil {
+        width: auto;
+        height: 50%;
+        margin-top: 0;
+        margin-bottom: 2px;
+    }
+    .channel-about h1{
+        font-size: 1.75rem;
+    }
+    .channel-skills {
+        padding: 4% 6%;
+    }
+    .channel-projects {
+        padding: 4% 6%;
+    }
+    .channel-contact {
+        padding: 4% 6%;
+    }
+    .tv-mosca {
+        display:block;
+    }
 }
