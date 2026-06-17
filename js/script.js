@@ -1,4 +1,4 @@
-const dials = document.querySelectorAll(".tv-dial");
+const dials = document.querySelectorAll('.tv-dial, .tv-controls button');
 const contents = document.querySelectorAll(".tv-content");
 const slides = document.querySelectorAll(".project-slide");
 const tvBg = document.getElementById("tv-bg");
@@ -69,8 +69,10 @@ dials.forEach(dial => {
         /* =====================
            BOTÓN ON / OFF
         ===================== */
-        if(dial.classList.contains("dial-on")){
+        if(dial.classList.contains("tv-dial")){
             tvOn = !tvOn;
+
+            dial.classList.toggle("is-on", tvOn);
 
             soundStatic.currentTime = 0;
             soundStatic.play();
@@ -79,7 +81,6 @@ dials.forEach(dial => {
                 // ENCENDER TV
                 tvScreen.classList.add("tv-on");
                 tvBg.classList.add("apagado-oculto");
-                dial.textContent = "OFF";
                 showContent("home");
                 dials.forEach(d => d.classList.remove("active"));
                 document.querySelector('.dial-1')?.classList.add("active");
@@ -87,7 +88,6 @@ dials.forEach(dial => {
                 // APAGAR TV
                 tvScreen.classList.remove("tv-on");
                 tvBg.classList.remove("apagado-oculto");
-                dial.textContent = "ON"; 
                 contents.forEach(c => c.classList.remove("active"));
                 stopSlideshow();
             }
