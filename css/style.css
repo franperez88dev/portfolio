@@ -75,9 +75,10 @@ p, span {
     left: 9.5%;
     width: 71%;
     height: 70%;
-    border-radius: 30px;
+    border-radius: 40px;
     overflow: hidden;
     z-index: 0;
+    
     background: radial-gradient(
         circle at center,
         #f7f7f2 0%,
@@ -135,7 +136,7 @@ p, span {
     left: 9.5%;
     width: 71%;
     height: 70%;
-    border-radius: 30px;
+    border-radius: 60px;
     background: transparent;
     display: flex;
     justify-content: center;
@@ -328,10 +329,33 @@ p, span {
 /* =========================================================
    BOTONES (METÁLICOS)
 ========================================================= */
+.onoff-label {
+    position: absolute;
+    top:8%;
+    font-size: clamp(.5rem, 2vw, 1.25rem);
+    font-weight: 700;
+    letter-spacing: .5px;
+    z-index: 4;
+    user-select: none;
+    pointer-events: none;
+    background: radial-gradient(circle,rgba(247, 248, 250, 1) 45%, rgb(180, 179, 179) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color:transparent;
+    
+}
+.onoff-label-on {
+    right: 13%;
+}
+.onoff-label-off {
+    right: 6.25%;
+}
+
 .tv-dial {
     position: absolute;
     right: 7.5%;
-    top: 13.25%;
+    top: 13.5%;
     width: 7.5%;
     aspect-ratio: 1 / 1;
     cursor: pointer;
@@ -355,53 +379,88 @@ p, span {
 
 .tv-controls {
     position: absolute;
-    right: 8%;
+    right: 7.5%;
     top: 29%;
-    width: 6.5%;
+    width: 8%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2vw;
+    gap: 1.5vw;
 }
 .tv-controls button {
-    position: static;
+    position: relative;
     width: 100%;
     height: auto;
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
     cursor: pointer;
     z-index: 5;
-    background: linear-gradient(125deg, darkslategray, white, darkslategray);
-    border: 3px solid rgb(61,61,61);
+    background: none;
+    border: none;
+    padding: 0;
     container-type: inline-size;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5cqw;
-    color: #0e0d0d;
-    text-shadow: 0 1px 0 rgba(255,255,255,.6), 0 -1px 1px rgba(0,0,0,.4);
+    transition: transform .12s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
-.onoff-label {
-    position: absolute;
-    font-size: clamp(.5rem, 2vw, 1rem);
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #000000;
-    text-shadow: 0 1px 0 rgba(255,255,255,.4), 0 -1px 0 rgba(0,0,0,.3);
-    z-index: 4;
-    user-select: none;
+.btn-channel-bg {
+    display: block;
+    width: 100%;
+    height: auto;
     pointer-events: none;
 }
-.onoff-label-on {
-    top: 9%;
-    right: 13%;
+.btn-channel-cap {
+    position: absolute;
+    inset: 0;
+    width: 78%;
+    height: 100%;
+    top: -7%;
+    left: 13%;
+    display: block;
+    transition: transform .12s ease;
+    pointer-events: none;
 }
-.onoff-label-off {
-    top: 9%;
-    right: 6.5%;
+.tv-controls button.active {
+    pointer-events: none;
 }
+
+.tv-controls button:active .btn-channel-cap {
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.tv-controls button.active  .btn-channel-label{
+    font-size: .75rem;
+    
+}
+
+
+.tv-controls img{
+    display: block;
+    width: 100%;
+    height: auto;
+} 
+
+.btn-channel-label {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    
+    font-weight: 700;
+    font-size: 26cqw;
+    
+    background: linear-gradient(to right, black, grey, black);
+    background-size: cover;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: black;
+    text-shadow: 0 1px 2px rgba(0,0,0,.7);
+}
+
 
 
 
@@ -456,11 +515,6 @@ p, span {
         padding: 10px;
     }
 
-    .tv-bg,
-    .tv-screen {
-        border-radius: 15px;
-    }
-
     .channel-home {
         padding: 4% 6%;
     }
@@ -479,23 +533,13 @@ p, span {
         padding: 4% 6%;
     }
 
-    .onoff-label-on {
-        top: 9%;
-        right: 12.5%;
-    }
-
-    .onoff-label-off {
-        top: 9%;
-        right: 6.25%;
-    }
-
-    .tv-dial {
+    /* .tv-dial {
         position: absolute;
         right: 7.5%;
         top: 15%;
         transform:rotate(20deg);
-    }
-    .tv-dial-on-off {
+    } */
+    /* .tv-dial-on-off {
         width: 100%;
         height: 100%;
         display: block;
@@ -505,7 +549,7 @@ p, span {
     }
     .tv-dial.is-on .tv-dial-on-off {
         transform: rotate(-50deg);
-    }
+    } */
 
 }
 
@@ -516,13 +560,6 @@ p, span {
 
     .tv-container {
         padding: 10px;
-    }
-
-    .tv-bg,
-    .tv-screen {
-        border-radius: 15px;
-        margin:0;
-        padding: 0;
     }
 
     h1 {
@@ -556,7 +593,7 @@ p, span {
         padding: 4% 6%;
     }
 
-    .onoff-label-on {
+    /* .onoff-label-on {
         top: 8%;
         right: 12.5%;
     }
@@ -564,15 +601,15 @@ p, span {
     .onoff-label-off {
         top: 8%;
         right: 6.25%;
-    }
+    } */
 
-    .tv-dial {
+    /* .tv-dial {
         position: absolute;
         right: 7.5%;
         top: 15%;
         transform:rotate(20deg);
-    }
-    .tv-dial-on-off {
+    } */
+    /* .tv-dial-on-off {
         width: 100%;
         height: 100%;
         display: block;
@@ -582,7 +619,7 @@ p, span {
     }
     .tv-dial.is-on .tv-dial-on-off {
         transform: rotate(-50deg);
-    }
+    } */
 
      .tv-mosca{
         /* scale: .76; */
@@ -602,12 +639,7 @@ p, span {
         padding: 10px;
     }
 
-    .tv-bg,
-    .tv-screen {
-        border-radius: 15px;
-        margin:0;
-        padding: 0;
-    }
+    
 
     h1 {
         margin-bottom: 2px;
@@ -647,7 +679,7 @@ p, span {
         padding: 0 25px;
     }
 
-        .channel-projects h3{
+    .channel-projects h3{
         margin: 2px 0;
         padding: 0px;
     }
@@ -663,19 +695,75 @@ p, span {
         height: auto;
     }
 
-    .onoff-label-on {
-        top: 7%;
-        right: 12.5%;
+    .onoff-label {
+        top: 7.5%;
     }
 
-    .onoff-label-off {
-        top: 7%;
-        right: 6.25%;
+    .tv-dial{
+        top:14.5%;
     }
+
+    .tv-mosca{
+        scale: .5;
+        padding: 8px 8px;
+        bottom: 6%;
+        right: 4%;
+    }
+    
+    
+
+    .tv-controls {
+        gap: 1.5vh;
+    }
+    
+    
+    .btn-channel-cap {
+        top: -35%;
+        
+    }
+
+    .tv-controls button.active  .btn-channel-label{
+        font-size: .45rem;
+        
+    }
+
+    .btn-channel-label {
+        top: -12%;
+    }
+
+}
+
+/* =========================================================
+   ¡AL FINAL DEL ARCHIVO CSS! 
+   Forzar diseño cuando la pantalla es muy achatada (Móvil Horizontal)
+========================================================= */
+@media only screen and (max-height: 440px) and (orientation: landscape) {
+    .tv-container {
+        padding: 10px;
+    }
+    .tv-wrapper {
+        width: min(1080px, 100%, calc((100vh - 20px) * 1.216));
+    }
+    
+    .tv-bg p{
+        font-size: medium;
+    }    
+    
+    /* .tv-dial {
+        position: absolute;
+        right: 7%;
+        top: 15%;
+        transform:rotate(20deg);
+    } */
+
+    .onoff-label {
+        /* position: absolute; */
+        font-size: .60rem;
+    } 
 
     .tv-dial {
         position: absolute;
-        right: 7%;
+        /* right: 7.5%; */
         top: 15%;
         transform:rotate(20deg);
     }
@@ -691,11 +779,70 @@ p, span {
         transform: rotate(-50deg);
     }
 
+
+    /* h1 {
+        margin-bottom: 2px;
+        padding-bottom:0%;
+    } */
+
+    .channel-home h1,
+    .channel-home span {
+        margin: -3px 0;
+    }
+
+    .channel-home .foto-perfil {
+        width: auto;
+        height: 50%;
+        margin-top: 0;
+        margin-bottom: 2px;
+    }
+
+    .channel-about p {
+        margin: 2px 0 0 0;
+        padding:0;
+        line-height: 1.5;
+    }
+
+    .channel-skills h1{
+        margin: -5px 0;
+        padding: -5px 0;
+    }
+
+    .channel-skills h2{
+        margin: 5px 0;
+        padding: 2px 30px;
+    }
+
+    .channel-skills img{
+        margin: -10px 10px 0px 10px;
+        padding: 0 25px;
+    }
+
+    .channel-projects h3{
+        margin: 2px 0;
+        padding: 0px;
+    }
+
+    .channel-projects p{
+        margin: 0px;
+        padding: 0px;
+        font-size: xx-small;
+    }
+
+    .channel-contact img{
+        width: 4vh;
+        height: auto;
+    }
+
+    
+
     .tv-mosca{
         scale: .5;
         padding: 8px 8px;
         bottom: 6%;
         right: 4%;
     }
-
+    
+    
+    
 }

@@ -82,13 +82,13 @@ dials.forEach(dial => {
                 tvScreen.classList.add("tv-on");
                 tvBg.classList.add("apagado-oculto");
                 showContent("home");
-                dials.forEach(d => d.classList.remove("active"));
-                document.querySelector('.dial-1')?.classList.add("active");
+                setActiveChannel(null);
             } else {
                 // APAGAR TV
                 tvScreen.classList.remove("tv-on");
                 tvBg.classList.remove("apagado-oculto");
                 contents.forEach(c => c.classList.remove("active"));
+                setActiveChannel(null);
                 stopSlideshow();
             }
             return;
@@ -102,11 +102,8 @@ dials.forEach(dial => {
         /* =====================
            CAMBIO DE CANAL
         ===================== */
-        soundStatic.currentTime = 0;
-        soundStatic.play();
 
-        dials.forEach(d => d.classList.remove("active"));
-        dial.classList.add("active");
+        setActiveChannel(dial);
         showContent(target);
 
         /* =====================
@@ -121,3 +118,19 @@ dials.forEach(dial => {
         }
     });
 });
+
+/* =========================
+   IMAGEN DE CANAL ACTIVO
+========================= */
+function setActiveChannel(activeDial){
+    document.querySelectorAll('.tv-controls button').forEach(btn => {
+        btn.classList.remove("active");
+        const img = btn.querySelector(".btn-channel-img");
+        if(img) img.src = "img/btn-channel.webp";
+    });
+    if(activeDial){
+        activeDial.classList.add("active");
+        const img = activeDial.querySelector(".btn-channel-img");
+        if(img) img.src = "img/btn-channel-pressed.webp";
+    }
+}

@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Portfolio Francisco Pérez</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="./css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -17,19 +17,19 @@
 
                 <!-- 1. FONDO: siempre detrás de todo -->
                 <div class="tv-bg" id="tv-bg">
-                    <img src="img/bg_tv.webp" alt="TV Off">
+                    <img src="./img/bg_tv.webp" alt="TV Off">
                     <p>© 2026 Francisco Pérez</p>
                 </div>
 
                 <!-- 2. MARCO: encima del fondo -->
-                <img src="img/marcoTV.webp" alt="TV Retro" class="tv-marco">
+                <img src="./img/marcoTV.webp" alt="TV Retro" class="tv-marco">
 
                 <!-- 3. PANTALLA/CONTENIDO: encima de todo -->
                 <div class="tv-screen">
 
                     <!-- HOME -->
                     <div class="tv-content channel-home " data-content="home">
-                        <img src="img/foto.webp" alt="Fran" class="foto-perfil">
+                        <img src="./img/foto.webp" alt="Fran" class="foto-perfil">
                         <h1>Fran Pérez</h1>
                         <span>Desarrollador Web · Full Stack</span>
                     </div>
@@ -118,11 +118,42 @@
                 </button>
 
                 <!-- CANALES -->
+                <!-- <div class="tv-controls">
+                    <button class="dial-1" data-content="about"><img src="img/btn-channel.webp" alt="ON/OFF" class="btn-channel-1"></button>
+                    <button class="dial-2" data-content="skills"><img src="img/btn-channel.webp" alt="ON/OFF" class="btn-channel-2"></button>
+                    <button class="dial-3" data-content="projects"><img src="img/btn-channel.webp" alt="ON/OFF" class="btn-channel-3"></button>
+                    <button class="dial-4" data-content="contact"><img src="img/btn-channel.webp" alt="ON/OFF" class="btn-channel-4"></button>
+                </div> -->
+                <!-- CANALES -->
                 <div class="tv-controls">
-                    <button class="dial-1" data-content="about">1</button>
-                    <button class="dial-2" data-content="skills">2</button>
-                    <button class="dial-3" data-content="projects">3</button>
-                    <button class="dial-4" data-content="contact">4</button>
+                    <button class="dial-1" data-content="about">
+                        <img src="img/btn-channel-bg.webp" alt="" class="btn-channel-bg">
+                        <span class="btn-channel-cap">
+                            <img src="img/btn-channel.webp" alt="Canal 1" class="btn-channel-img btn-channel-1">
+                            <span class="btn-channel-label">ch 1</span>
+                        </span>
+                    </button>
+                    <button class="dial-2" data-content="skills">
+                        <img src="img/btn-channel-bg.webp" alt="" class="btn-channel-bg">
+                        <span class="btn-channel-cap">
+                            <img src="img/btn-channel.webp" alt="Canal 2" class="btn-channel-img btn-channel-2">
+                            <span class="btn-channel-label">ch 2</span>
+                        </span>
+                    </button>
+                    <button class="dial-3" data-content="projects">
+                        <img src="img/btn-channel-bg.webp" alt="" class="btn-channel-bg">
+                        <span class="btn-channel-cap">
+                            <img src="img/btn-channel.webp" alt="Canal 3" class="btn-channel-img btn-channel-3">
+                            <span class="btn-channel-label">ch 3</span>
+                        </span>
+                    </button>
+                    <button class="dial-4" data-content="contact">
+                        <img src="img/btn-channel-bg.webp" alt="" class="btn-channel-bg">
+                        <span class="btn-channel-cap">
+                            <img src="img/btn-channel.webp" alt="Canal 4" class="btn-channel-img btn-channel-4">
+                            <span class="btn-channel-label">ch 4</span>
+                        </span>
+                    </button>
                 </div>
 
             </div>
