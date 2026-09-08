@@ -60,16 +60,23 @@ function showContent(target){
 dials.forEach(dial => {
     dial.addEventListener("click", () => {
 
+        const target = dial.dataset.content;
+        const isPowerButton = dial.classList.contains("tv-dial");
+
+        /* =====================
+           BLOQUEO SI ESTÁ OFF
+           (los botones de canal no hacen nada, ni sonido, con la TV apagada)
+        ===================== */
+        if(!isPowerButton && !tvOn) return;
+
         // Cualquier botón que toques hace "click"
         soundClick.currentTime = 0;
         soundClick.play();
 
-        const target = dial.dataset.content;
-
         /* =====================
            BOTÓN ON / OFF
         ===================== */
-        if(dial.classList.contains("tv-dial")){
+        if(isPowerButton){
             tvOn = !tvOn;
 
             dial.classList.toggle("is-on", tvOn);
@@ -95,11 +102,6 @@ dials.forEach(dial => {
         }
 
         /* =====================
-           BLOQUEO SI ESTÁ OFF
-        ===================== */
-        if(!tvOn) return;
-
-        /* =====================
            CAMBIO DE CANAL
         ===================== */
 
@@ -123,14 +125,10 @@ dials.forEach(dial => {
    IMAGEN DE CANAL ACTIVO
 ========================= */
 function setActiveChannel(activeDial){
-    document.querySelectorAll('.tv-controls button').forEach(btn => {
+    document.querySelectorAll('.channel-btn').forEach(btn => {
         btn.classList.remove("active");
-        const img = btn.querySelector(".btn-channel-img");
-        if(img) img.src = "img/btn-channel.webp";
     });
     if(activeDial){
         activeDial.classList.add("active");
-        const img = activeDial.querySelector(".btn-channel-img");
-        if(img) img.src = "img/btn-channel-pressed.webp";
     }
 }
