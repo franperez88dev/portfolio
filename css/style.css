@@ -21,7 +21,7 @@ h1, h2, h3 {
 }
 
 section {
-    margin: var(--space-2xl) 0;
+    margin: var(--space-xl) 0;
     scroll-margin-top: 100px;
 }
 
@@ -261,12 +261,14 @@ img {
     flex-direction: column;
     gap: var(--space-sm);
     padding: var(--space-md);
+    flex: 1;
 }
 .proyecto-content h3 { margin-bottom: 0; }
 .proyecto-stack {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-xs);
+    margin-top: auto;
 }
 .proyecto-stack span {
     display: inline-flex;
@@ -280,6 +282,9 @@ img {
 }
 
 /* ===== SKILLS ===== */
+#skills{
+    cursor: default;
+}
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
@@ -329,26 +334,32 @@ img {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 15px;
-    padding: var(--space-md);
+    padding: var(--space-md) ;
     max-width: 500px;
     color: var(--color-text);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    
 }
 .contacto-card:hover {
     border-color: var(--color-secondary);
     box-shadow: 0 0 30px var(--color-secondary-glow);
     transform: translateY(-4px);
+    -webkit-user-drag: none;
 }
 .contacto-label {
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     color: var(--color-text-secondary);
     letter-spacing: 1px;
+    cursor: default;
+    
 }
 .contacto-email {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
     font-weight: 700;
+    cursor: text;
+    
 }
 .contacto-social {
     display: flex;
@@ -371,9 +382,7 @@ img {
     transform: translateY(-2px);
 }
 
-.contacto-email {
-    font-size: var(--font-size-md);
-}
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
