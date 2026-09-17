@@ -1,491 +1,467 @@
-/* =========================================================
-   RESET
-========================================================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-    background: #07141b;
-    color: #333;
-    font-family: 'Montserrat', sans-serif;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+nav ul {
+    display: flex;
+    gap: 5px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+}
+
+section {
+    margin: var(--space-2xl) 0;
+    scroll-margin-top: 100px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+}
+
+/* ===== HEADER ===== */
+.site-header {
+    display: grid;
+    grid-template-areas: "title nav theme";
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: var(--space-sm) var(--space-lg);
+    position: sticky;
+    top: 0;
+    background-color: var(--color-background);
+    z-index: 3;
+    box-shadow: 0 2px 5px var(--color-border);
+}
+.header-title {
+    grid-area: title;
+    font-weight: 700;
+    color: var(--color-accent);
+}
+.header-nav {
+    grid-area: nav;
+    justify-self: center;
+}
+
+.nav-links a {
+    padding: 10px 20px;
+    background: transparent;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.nav-links a:hover {
+    transform: scale(1.03);
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 15px var(--color-secondary-glow);
+}
+
+/* ===== BTN THEME DARK-LIGHT ===== */
+.switchTheme {
+    grid-area: theme;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    background: var(--color-primary);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.switchTheme:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 15px var(--color-secondary-glow);
+}
+
+/* ===== MAIN ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* ===== HERO ===== */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-lg) 0;
+}
+.hero-text {
+    max-width: 600px;
+}
+.hero h1 {
+    font-size: var(--font-size-3xl);
+    line-height: 1.1;
+    margin-bottom: var(--space-xs);
+}
+.hero-role {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-xs);
+}
+.hero-location {
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    font-size: var(--font-size-xs);
+    letter-spacing: 1px;
+    margin-bottom: var(--space-md);
+}
+.hero-bio {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+.hero-buttons {
+    display: flex;
+    gap: var(--space-xs);
+}
+.hero-photo {
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hero-photo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px var(--color-accent-glow);
+}
+
+.btn {
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-text);
+}
+.btn-primary:hover {
+    background: var(--color-accent-hover);
+    box-shadow: 0 0 25px var(--color-accent-glow);
+    transform: translateY(-2px);
+}
+.btn-secondary {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+.btn-secondary:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 20px var(--color-secondary-glow);
+    transform: translateY(-2px);
+}
+
+/* ===== MARQUEE ===== */
+.marquee {
     overflow: hidden;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    white-space: nowrap;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 0;
+    margin: var(--space-lg) 0;
+}
+.marquee-content {
+    display: inline-flex;
+    animation: marquee 18s linear infinite;
+}
+.marquee-group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-lg);
+    padding-right: var(--space-lg);
+}
+.marquee-content span {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+}
+.marquee-content span:nth-child(4n+1) {
+    color: var(--color-primary);
+}
+.marquee-content span:nth-child(4n+2) {
+    color: var(--color-secondary);
+}
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ===== TÍTULO DE SECCIÓN ===== */
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    font-size: var(--font-size-2xl);
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+.section-label::before {
+    content: "◆";
+    font-size: 14px;
+}
+
+/* ===== PROYECTOS ===== */
+.proyectos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+.proyecto-article {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-surface);
+    border: 1px solid transparent;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    animation: fadeInUp 1.5s ease-out;
+}
+.proyecto-article:nth-child(1) { animation-delay: 0s; }
+.proyecto-article:nth-child(2) { animation-delay: 0.15s; }
+.proyecto-article:nth-child(3) { animation-delay: 0.3s; }
+.proyecto-article:nth-child(4) { animation-delay: 0.45s; }
+.proyecto-article:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-secondary);
+    box-shadow: 0 20px 45px rgba(0,0,0,.35), 0 0 45px var(--color-secondary-glow);
+}
+.proyecto-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+.proyecto-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+}
+.proyecto-content h3 { margin-bottom: 0; }
+.proyecto-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+.proyecto-stack span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: var(--font-size-xs);
     font-weight: 600;
 }
 
-/* =========================================================
-   TEXTOS GENERALES
-   Fluido en cqw = % del ancho de .tv-wrapper (la tele),
-   NO del viewport. Así el texto escala con la tele.
-========================================================= */
-h1 {
-    font-size: clamp(1.1rem, 4.5cqw, 2.4rem);
-    color: blue;
+/* ===== SKILLS ===== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: var(--space-md);
 }
-
-h2 {
-    font-size: clamp(0.95rem, 3.2cqw, 1.9rem);
+.skill-category {
+    background: var(--color-surface);
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding: var(--space-md);
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
-
-h3 {
-    font-size: clamp(0.75rem, 2.6cqw, 1.5rem);
+.skill-category:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-secondary);
+    box-shadow: 0 20px 45px rgba(0,0,0,.35), 0 0 45px var(--color-secondary-glow);
 }
-
-p, span {
-    font-size: clamp(0.6rem, 2.3cqw, 1.15rem);
-    line-height: 1.5;
-}
-
-/* Dentro de la tele el ritmo lo lleva SOLO el gap de cada canal.
-   Ponemos los márgenes a 0 para que gap y margin no se sumen
-   (eso era lo que apelotonaba el contenido en pantallas pequeñas). */
-.tv-content h1,
-.tv-content h2,
-.tv-content h3,
-.tv-content p,
-.tv-content span {
-    margin: 0;
-}
-
-/* =========================================================
-   LAYOUT TV
-========================================================= */
-.tv-container {
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
+.skill-category h3 { margin-bottom: var(--space-md); }
+.skill-tags {
+    list-style: none;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+.skill-tags li {
+    display: inline-flex;
     align-items: center;
-    padding: 10px;
-    --tv-vpad: 20px;
-    box-sizing: border-box;
+    gap: 6px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 20px;
+    font-size: var(--font-size-sm);
 }
 
-.tv-wrapper {
-    position: relative;
-    isolation: isolate;
-    container-type: inline-size;   /* 1cqw = 1% de este ancho */
-    /* Ocupa todo lo disponible respetando la proporción real
-       de marcoTV.webp (1721x1415 ≈ 1.216). */
-    width: min(100%, calc((100vh - var(--tv-vpad, 20px)) * 1.216));
+/* ===== CONTACTO ===== */
+.contacto-intro {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
 }
-
-/* =========================================================
-   CAPA 1: FONDO
-========================================================= */
-.tv-bg {
-    position: absolute;
-    top: 14%;
-    left: 9.5%;
-    width: 71%;
-    height: 70%;
-    border-radius: 40px;
-    overflow: hidden;
-    z-index: 0;
-
-    background: radial-gradient(
-        circle at center,
-        #f7f7f2 0%,
-        #e6e6dc 50%,
-        #cfcfc4 120%
-    );
-}
-
-.tv-bg img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    transition: opacity .6s ease;
-}
-
-.tv-bg p {
-    position: absolute;
-    bottom: 46%;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    color: #727272;
-    font-size: clamp(0.7rem, 3.2cqw, 1.6rem);
-    z-index: 1;
-}
-
-/* Al encender: se oculta la imagen de "apagado" */
-.tv-bg.apagado-oculto img,
-.tv-bg.apagado-oculto p {
-    opacity: 0;
-}
-
-/* =========================================================
-   CAPA 2: MARCO
-========================================================= */
-.tv-marco {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 1;
-}
-
-/* =========================================================
-   CAPA 3: PANTALLA / CONTENIDO
-========================================================= */
-.tv-screen {
-    position: absolute;
-    top: 14%;
-    left: 9.5%;
-    width: 71%;
-    height: 70%;
-    border-radius: 60px;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    z-index: 2;
-    transition: box-shadow .6s ease;
-}
-
-.tv-screen.tv-on {
-    box-shadow:
-        0 0 25px rgba(255,255,255,.15),
-        inset 0 0 20px rgba(255,255,255,.1);
-}
-
-/* CRT overlay (líneas + viñeta) */
-.tv-screen::before,
-.tv-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 3;
-}
-
-.tv-screen::before {
-    background: repeating-linear-gradient(
-        to bottom,
-        rgba(255,255,255,.03) 0px,
-        rgba(255,255,255,.03) 2px,
-        transparent 2px,
-        transparent 4px
-    );
-}
-
-.tv-screen::after {
-    background: radial-gradient(
-        circle,
-        transparent 40%,
-        rgba(0,0,0,.35) 100%
-    );
-}
-
-/* =========================================================
-   BASE COMÚN A TODOS LOS CANALES
-========================================================= */
-.tv-content {
-    display: none;
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-    animation: tvOn .3s ease;
-}
-
-.tv-content.active {
-    display: flex;
-}
-
-@keyframes tvOn {
-    0%   { opacity: 0; transform: scaleY(0); }
-    100% { opacity: 1; transform: scaleY(1); }
-}
-
-/* =========================================================
-   CANAL: HOME
-========================================================= */
-.channel-home {
-    padding: 6% 8%;
-    gap: 2cqw;
-}
-
-.channel-home .foto-perfil {
-    width: clamp(60px, 15cqw, 130px);
-    height: clamp(60px, 15cqw, 130px);
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-/* =========================================================
-   CANAL: SOBRE MÍ
-========================================================= */
-.channel-about {
-    padding: 8% 10%;
-    gap: 2.5cqw;
-}
-
-/* =========================================================
-   CANAL: HABILIDADES
-========================================================= */
-.channel-skills {
-    padding: 5% 6%;
-    gap: 1.5cqw;
-}
-
-.channel-skills h2 {
-    font-size: clamp(0.85rem, 2.4cqw, 1.3rem);
-}
-
-.channel-skills img {
-    max-width: 100%;
-    height: clamp(22px, 7cqw, 46px);
-    width: auto;
-    object-fit: contain;
-}
-
-/* =========================================================
-   CANAL: PROYECTOS
-========================================================= */
-.channel-projects {
-    padding: 4% 6%;
-    gap: 1.5cqw;
-}
-
-.project-slide {
-    display: none;
-    width: 90%;
-    height: 80%;
-    flex-direction: column;
-    align-items: center;       /* centra la imagen (que es más estrecha) */
-    justify-content: center;   /* antes: space-between -> pegaba el título abajo */
-    gap: 3cqw;                 /* separación real entre imagen y título */
-}
-
-.project-slide.active { display: flex; }   /* esta la dejas igual */
-
-.project-slide img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 70%;           /* antes: height 100% -> ahora deja aire para el título */
-    object-fit: contain;
-    flex-shrink: 1;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-.project-info {
+.contacto-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    flex-shrink: 0;
+    gap: var(--space-xs);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 15px;
+    padding: var(--space-md);
+    max-width: 500px;
+    color: var(--color-text);
+    margin-bottom: var(--space-lg);
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
-
-.project-info p {
-    font-size: clamp(0.5rem, 1.9cqw, 1rem);
+.contacto-card:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 30px var(--color-secondary-glow);
+    transform: translateY(-4px);
 }
-
-/* =========================================================
-   CANAL: CONTACTO
-========================================================= */
-.channel-contact {
-    padding: 8% 10%;
-    gap: 3cqw;
+.contacto-label {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    letter-spacing: 1px;
 }
-
-.contact-icons {
-    display: flex;
-    justify-content: center;
-    gap: clamp(20px, 5cqw, 50px);
-}
-
-.contact-icons a {
-    display: inline-block;
-}
-
-.contact-icons img {
-    width: clamp(22px, 9cqw, 80px);
-    height: clamp(22px, 9cqw, 80px);
-    transition: transform 0.2s ease;
-}
-
-.contact-icons a:hover img {
-    transform: scale(1.15);
-}
-
-/* =========================================================
-   ETIQUETAS ON / OFF (impresas sobre el marco)
-========================================================= */
-.onoff-label {
-    position: absolute;
-    top: 8%;
-    font-size: clamp(.5rem, 2cqw, 1.1rem);
+.contacto-email {
+    font-size: var(--font-size-lg);
     font-weight: 700;
-    letter-spacing: .5px;
-    z-index: 4;
-    user-select: none;
-    pointer-events: none;
-    background: radial-gradient(circle, rgba(247,248,250,1) 45%, rgb(180,179,179) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
 }
-.onoff-label-on  { right: 13%; }
-.onoff-label-off { right: 6.25%; }
-
-/* =========================================================
-   BOTÓN ON / OFF (dial giratorio)
-========================================================= */
-.tv-dial {
-    position: absolute;
-    right: 7.5%;
-    top: 13.5%;
-    width: 7.5%;
-    aspect-ratio: 1 / 1;
-    cursor: pointer;
-    z-index: 5;
-    background: none;
-    border: none;
-    padding: 0;
-    transform: rotate(20deg);
-}
-.tv-dial-on-off {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    transform-origin: 50% 50%;
-    transition: transform .3s ease;
-}
-.tv-dial.is-on .tv-dial-on-off {
-    transform: rotate(-50deg);
-}
-
-/* =========================================================
-   BOTONES DE CANAL (crossfade OFF <-> ON por opacidad)
-========================================================= */
-.tv-controls {
-    position: absolute;
-    right: 7.5%;
-    top: 29%;
-    width: 8%;
+.contacto-social {
     display: flex;
-    flex-direction: column;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+.social-pill {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 1.5cqw;
+    gap: 6px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--font-size-sm);
+    transition: all .3s ease;
+}
+.social-pill:hover {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 20px var(--color-secondary-glow);
+    transform: translateY(-2px);
 }
 
-.channel-btn {
-    position: relative;      /* ancla para apilar la imagen ON encima */
-    width: 100%;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    z-index: 5;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+.contacto-email {
+    font-size: var(--font-size-md);
 }
 
-/* Las dos imágenes: la OFF manda el tamaño; ambas dejan pasar el clic */
-.channel-btn img {
-    display: block;
-    width: 100%;
-    height: auto;
-    pointer-events: none;    /* el clic atraviesa las imgs y llega al button */
-}
-
-.channel-btn .ch-on {
-    position: absolute;      /* se apila justo sobre la OFF */
-    inset: 0;                /* mismo sitio y tamaño */
-    opacity: 0;              /* de partida, invisible */
-    transition: opacity .25s ease;   /* el fundido suave */
-}
-
-/* Canal activo: la ON aparece y el botón no se puede re-clicar */
-.channel-btn.active .ch-on { opacity: 1; }
-.channel-btn.active { pointer-events: none; }
-
-/* Feedback al pulsar (se hunde un poco) */
-.channel-btn:active { transform: scale(.97); }
-
-/* =========================================================
-   MOSCA DE CANAL
-   padding en em -> escala con su propia fuente (cqw). Sin scale() hacks.
-========================================================= */
-.tv-mosca {
-    position: absolute;
-    bottom: 9%;
-    right: 9%;
-    background: rgba(0, 0, 0, 0.5);
-    color: #00ff00bd;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: clamp(0.7rem, 2.6cqw, 1.4rem);
-    padding: 0.5em 0.55em;
-    border-radius: 50%;
-    text-align: center;
-    text-shadow: 1px 2px 3px rgba(19, 17, 17, 0.521);
-    pointer-events: none;
-    z-index: 4;
-    user-select: none;
-}
-
-/* =========================================================
-   NOISE CRT (preparado, aún no enganchado en el HTML)
-========================================================= */
-.tv-noise {
-    position: absolute;
-    inset: 0;
-    z-index: 3;
-    pointer-events: none;
-    background-image: url("https://www.transparenttextures.com/patterns/noise.png");
-    opacity: 0;
-    mix-blend-mode: overlay;
-    animation: noiseMove .2s infinite;
-}
-
-@keyframes noiseMove {
-    0%   { transform: translate(0,0); }
-    25%  { transform: translate(-2%,2%); }
-    50%  { transform: translate(2%,-2%); }
-    75%  { transform: translate(-1%,1%); }
-    100% { transform: translate(0,0); }
-}
-
-/* =========================================================
-   RESPONSIVE
-   Al medir el contenido en cqw (escala con la tele) casi no
-   hacen falta ajustes por breakpoint. Solo quedan retoques
-   finos de padding para el móvil pequeño y el apaisado.
-========================================================= */
-
-/* Móvil pequeño */
-@media only screen and (max-width: 480px) {
-    .channel-about,
-    .channel-skills,
-    .channel-projects,
-    .channel-contact {
-        padding: 4% 6%;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .nav-links a {
+        padding: 8px 12px;
+        font-size: var(--font-size-sm);
+    }
+    .nav-links li a {
+        white-space: nowrap;
     }
 }
 
-/* Móvil horizontal / pantallas muy achatadas */
-@media only screen and (max-height: 440px) and (orientation: landscape) {
-    .tv-wrapper {
-        width: min(1080px, 100%, calc((100vh - 20px) * 1.216));
+@media (max-width: 768px) {
+    .site-header {
+        grid-template-areas:
+            "title theme"
+            "nav nav";
+        grid-template-columns: 1fr auto;
+        gap: var(--space-sm);
     }
+
+    .site-header .nav-links a {
+        padding: 6px 6px;
+        font-size: var(--font-size-md);
+    }   
+    
+    .site-header .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .site-header .nav-links li {
+        border-right: none;
+    }
+
+    .header-nav {
+        justify-self: stretch;
+    }
+
+    .proyectos-grid, .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-sm);
+    }
+    /* .hero { flex-direction: column-reverse; text-align: center; } */
+    /* .hero-buttons { justify-content: center; } */
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: var(--font-size-sm);
+        white-space: nowrap;
+    }
+    .hero h1 { font-size: var(--font-size-2xl); }
+    .hero-photo {width: 200px; height: 200px;}
+    .section-label { font-size: var(--font-size-xl); }
+    h2 { font-size: var(--font-size-lg); }
+    p { font-size: var(--font-size-md); }
+}
+
+@media (max-width: 480px) {
+    
+
+    .site-header {
+        padding: 10px 10px;
+    }
+
+    .site-header .switchTheme {
+        padding: 5px 5px;
+        font-size: var(--font-size-xs);
+    }
+
+    .site-header .nav-links a {
+        
+        margin: 0;
+        padding: 6px 10px;
+        font-size: var(--font-size-xs);
+    } 
+    .hero { flex-direction: column-reverse; text-align: center; }
+    .hero-buttons { justify-content: center; }
+
+    .proyectos-grid, .skills-grid {
+        grid-template-columns:  1fr;
+    }
+
+
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0px); }
 }

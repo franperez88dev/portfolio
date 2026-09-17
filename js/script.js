@@ -1,134 +1,18 @@
-const dials = document.querySelectorAll('.tv-dial, .tv-controls button');
-const contents = document.querySelectorAll(".tv-content");
-const slides = document.querySelectorAll(".project-slide");
-const tvBg = document.getElementById("tv-bg");
-const tvScreen = document.querySelector(".tv-screen");
+const themeSwitch = document.documentElement;
+const botonSwitch = document.querySelector('.switchTheme');
 
-let currentSlide = 0;
-let slideInterval = null;
-let tvOn = false;
-
-/* =========================
-   AUDIO CONFIGURATION
-========================= */
-const soundClick = new Audio('audio/click.wav');
-const soundStatic = new Audio('audio/tv-static.wav');
-soundClick.volume = 0.4;
-soundStatic.volume = 0.3;
-
-/* =========================
-   SLIDESHOW PROJECTS
-========================= */
-function showSlide(index){
-    slides.forEach(s => s.classList.remove("active"));
-    if(slides[index]){
-        slides[index].classList.add("active");
+botonSwitch.addEventListener('click', function() {
+    if (themeSwitch.getAttribute('data-theme') == 'light') {
+        themeSwitch.setAttribute('data-theme', 'dark');
+        botonSwitch.textContent = '☀️';
+    } else {
+        themeSwitch.setAttribute('data-theme', 'light');
+        botonSwitch.textContent = '🌙';
     }
-}
-
-function nextSlide(){
-    currentSlide++;
-    if(currentSlide >= slides.length){
-        currentSlide = 0;
-    }
-    showSlide(currentSlide);
-}
-
-function startSlideshow(){
-    stopSlideshow();
-    slideInterval = setInterval(nextSlide, 4000);
-}
-
-function stopSlideshow(){
-    clearInterval(slideInterval);
-}
-
-/* =========================
-   CONTENIDO TV
-========================= */
-function showContent(target){
-    contents.forEach(c => c.classList.remove("active"));
-    const el = document.querySelector(`[data-content="${target}"]`);
-    if(el){
-        el.classList.add("active");
-    }
-}
-
-/* =========================
-   EVENTOS BOTONES (CON AUDIO UNIFICADO)
-========================= */
-dials.forEach(dial => {
-    dial.addEventListener("click", () => {
-
-        const target = dial.dataset.content;
-        const isPowerButton = dial.classList.contains("tv-dial");
-
-        /* =====================
-           BLOQUEO SI ESTÁ OFF
-           (los botones de canal no hacen nada, ni sonido, con la TV apagada)
-        ===================== */
-        if(!isPowerButton && !tvOn) return;
-
-        // Cualquier botón que toques hace "click"
-        soundClick.currentTime = 0;
-        soundClick.play();
-
-        /* =====================
-           BOTÓN ON / OFF
-        ===================== */
-        if(isPowerButton){
-            tvOn = !tvOn;
-
-            dial.classList.toggle("is-on", tvOn);
-
-            soundStatic.currentTime = 0;
-            soundStatic.play();
-
-            if(tvOn){
-                // ENCENDER TV
-                tvScreen.classList.add("tv-on");
-                tvBg.classList.add("apagado-oculto");
-                showContent("home");
-                setActiveChannel(null);
-            } else {
-                // APAGAR TV
-                tvScreen.classList.remove("tv-on");
-                tvBg.classList.remove("apagado-oculto");
-                contents.forEach(c => c.classList.remove("active"));
-                setActiveChannel(null);
-                stopSlideshow();
-            }
-            return;
-        }
-
-        /* =====================
-           CAMBIO DE CANAL
-        ===================== */
-
-        setActiveChannel(dial);
-        showContent(target);
-
-        /* =====================
-           SLIDESHOW PROJECTS
-        ===================== */
-        if(target === "projects"){
-            currentSlide = 0;
-            showSlide(currentSlide);
-            startSlideshow();
-        } else {
-            stopSlideshow();
-        }
-    });
 });
 
-/* =========================
-   IMAGEN DE CANAL ACTIVO
-========================= */
-function setActiveChannel(activeDial){
-    document.querySelectorAll('.channel-btn').forEach(btn => {
-        btn.classList.remove("active");
-    });
-    if(activeDial){
-        activeDial.classList.add("active");
+document.querySelectorAll('*').forEach(el => {
+    if (el.scrollWidth > document.documentElement.clientWidth) {
+        console.log(el, el.scrollWidth);
     }
-}
+});

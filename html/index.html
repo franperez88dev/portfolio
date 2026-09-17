@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon">
+    <title>Fran Perez | Desarrollador Full-Stack</title>
+</head>
+<body>
+
+    <header class="site-header">
+        <p class="header-title">
+            <i class="devicon-github-original"></i>
+            franperez88dev
+        </p>
+        <nav class="header-nav">
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <button class="switchTheme" aria-label="Cambiar tema">☀️</button>
+    </header>
+
+    <main class="container">
+
+        <section id="inicio" class="hero">
+            <div class="hero-text">
+                <h1>Fran Perez</h1>
+                <p class="hero-role">Desarrollador Full-Stack</p>
+                <p class="hero-location">Las Rozas de Madrid</p>
+                <p class="hero-bio">
+                    Combino Python, Flask y Machine Learning con experiencia
+                    real construyendo aplicaciones web completas. Ahora
+                    ampliando conocimientos en JavaScript, TypeScript y React.
+                </p>
+                <div class="hero-buttons">
+                    <!-- <a href="#proyectos" class="btn btn-primary">Ver proyectos</a> -->
+                    <!-- <a href="#contacto" class="btn btn-secondary">Contacto</a> -->
+                    <a href="https://github.com/franperez88dev" target="_blank" rel="noopener noreferrer" class="social-pill">
+                        <i class="devicon-github-original"></i>
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/franciscoperezromero/" target="_blank" rel="noopener noreferrer" class="social-pill">
+                        <i class="devicon-linkedin-plain"></i>
+                        LinkedIn
+                    </a>
+                    <a href="mailto:franciscoangelperez@gmail.com"" target="_blank"  class="social-pill">
+                        <i class="material-icons">mail</i>
+                        Gmail
+                    </a>
+                </div>
+            </div>
+            <img src="/img/foto-perfil.webp" width="280" height="280" alt="Foto de perfil de Fran Perez" class="hero-photo">
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-content">
+                <div class="marquee-group">
+                    <span>PYTHON</span><span>✦</span>
+                    <span>FLASK</span><span>✦</span>
+                    <span>HTML5</span><span>✦</span>
+                    <span>CSS3</span><span>✦</span>
+                    <span>JAVASCRIPT</span><span>✦</span>
+                    <span>MACHINE LEARNING</span><span>✦</span>
+                </div>
+                <div class="marquee-group">
+                    <span>PYTHON</span><span>✦</span>
+                    <span>FLASK</span><span>✦</span>
+                    <span>HTML5</span><span>✦</span>
+                    <span>CSS3</span><span>✦</span>
+                    <span>JAVASCRIPT</span><span>✦</span>
+                    <span>MACHINE LEARNING</span><span>✦</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- <hr class="section-divider"> -->
+
+        <section id="sobre-mi">
+            <h2 class="section-label">Sobre mí</h2>
+            <p>
+                Combino formación específica en programación con Python y
+                Machine Learning con experiencia práctica construyendo
+                aplicaciones web completas. Cuento además con dos años de
+                experiencia profesional en desarrollo web (JavaScript, HTML,
+                CSS) y atención al cliente. Actualmente busco incorporarme a
+                un equipo de desarrollo donde aportar y seguir creciendo.
+            </p>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="proyectos">
+            <h2 class="section-label">Proyectos</h2>
+
+            <div class="proyectos-grid">
+                
+
+                <article class="proyecto-article">
+                    <img src="/img/ruleta1.webp" alt="Ruleta de la suerte" class="proyecto-img">
+                    <div class="proyecto-content">
+                        <h3>Ruleta de la suerte</h3>
+                        <p>Concurso de la TV creado con Node.js, Socket.io y Phaser.js</p>
+                        <div class="proyecto-stack">
+                            <span><i class="devicon-nodejs-plain-wordmark"></i>Node.js</span>
+                            <span><i class="devicon-socketio-original"></i>Socket.io</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="proyecto-article">
+                    <img src="/img/mazmorra1.webp" alt="Mazmorra 3D" class="proyecto-img">
+                    <div class="proyecto-content">
+                        <h3>Mazmorra 3D</h3>
+                        <p>Videojuego creado con Unity 3D como proyecto final de máster.</p>
+                        <div class="proyecto-stack">
+                            <span><i class="devicon-unity-plain"></i>Unity</span>
+                            <span><i class="devicon-csharp-plain"></i>C#</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="proyecto-article">
+                    <img src="/img/inmo1.webp" alt="Inmobiliaria" class="proyecto-img">
+                    <div class="proyecto-content">
+                        <h3>Inmobiliaria</h3>
+                        <p>Plataforma de venta y alquiler de propiedades hecha con Python, Flask, Mistral y YOLOv8</p>
+                        <div class="proyecto-stack">
+                            <span><i class="devicon-python-plain"></i>Python</span>
+                            <span><i class="devicon-flask-original"></i>Flask</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="proyecto-article">
+                    <img src="/img/peliculas1.webp" alt="Palomitas y Series" class="proyecto-img">
+                    <div class="proyecto-content">
+                        <h3>Palomitas y Series</h3>
+                        <p>Plataforma de películas y series hecha con Python, Flask y SQLAlchemy. Proyecto Fin de Máster.</p>
+                        <div class="proyecto-stack">
+                            <span><i class="devicon-python-plain"></i>Python</span>
+                            <span><i class="devicon-flask-original"></i>Flask</span>
+                            <span><i class="devicon-sqlalchemy-plain"></i>SQLAlchemy</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="skills">
+            <h2 class="section-label">Skills</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Frontend</h3>
+                    <ul class="skill-tags">
+                        <li><i class="devicon-html5-plain colored"></i>HTML5</li>
+                        <li><i class="devicon-css3-plain colored"></i>CSS3</li>
+                        <li><i class="devicon-bootstrap-plain colored"></i>Bootstrap</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Backend</h3>
+                    <ul class="skill-tags">
+                        <li><i class="devicon-python-plain colored"></i>Python</li>
+                        <li><i class="devicon-flask-original"></i>Flask</li>
+                        <li><i class="devicon-sqlite-plain colored"></i>SQL / SQLite</li>
+                        <li><i class="devicon-git-plain colored"></i>Git</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Data & AI</h3>
+                    <ul class="skill-tags">
+                        <li><i class="devicon-scikitlearn-plain colored"></i>Scikit-learn</li>
+                        <li><i class="devicon-tensorflow-original colored"></i>TensorFlow / Keras</li>
+                        <li><i class="devicon-opencv-plain colored"></i>OpenCV</li>
+                        <li><i class="devicon-pandas-plain "></i>Pandas</li>
+                        <li><i class="devicon-numpy-plain"></i>NumPy</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Learning</h3>
+                    <ul class="skill-tags">
+                        <li><i class="devicon-javascript-plain colored"></i>JavaScript</li>
+                        <li><i class="devicon-react-original colored"></i>React</li>
+                        <li><i class="devicon-typescript-original colored"></i>TypeScript</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="contacto">
+            <h2 class="section-label">Contacto</h2>
+
+            <a href="mailto:franciscoangelperez@gmail.com" class="contacto-card">
+                <span class="contacto-label">Enviar un mensaje</span>
+                <span class="contacto-email">franciscoangelperez@gmail.com</span>
+            </a>
+
+            <div class="contacto-social">
+                <a href="https://github.com/franperez88dev" target="_blank" rel="noopener noreferrer" class="social-pill">
+                    <i class="devicon-github-original"></i>
+                    GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/franciscoperezromero/" target="_blank" rel="noopener noreferrer" class="social-pill">
+                    <i class="devicon-linkedin-plain"></i>
+                    LinkedIn
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p style="color: var(--color-text-secondary); font-size: medium; text-align: center;">&copy; 2026 Francisco Ángel Pérez Romero</p>
+    </footer>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
